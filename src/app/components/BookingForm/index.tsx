@@ -24,12 +24,6 @@ export default function BookingForm() {
                   id="check-in"
                   className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                 />
-                {errors.find((error) => error.path === "checkIn") && (
-                  <p className="text-red-500 flex items-center">
-                    <span className="mr-1">⚠️</span>
-                    {errors.find((error) => error.path === "checkIn").message}
-                  </p>
-                )}
               </div>
               <div>
                 <Label

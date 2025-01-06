@@ -26,7 +26,7 @@ const SignIn = () => {
     <div className="flex justify-center items-center h-screen bg-[#050042]">
       <form
         onSubmit={handleSubmit}
-        className="space-y-4 p-4 w-[90%] bg-#c007bc rounded-lg shadow-lg max-w-sm"
+        className="space-y-4 p-4 w-[90%] sm:w-[30%] bg-[#050042] rounded-lg shadow-lg max-w-sm md:max-w-lg lg:max-w-4xl xl:max-w-6xl"
       >
         <div className="items-center justify-center flex">
           <Image src={Logo} alt="logo" width={200} height={200} />
@@ -45,7 +45,7 @@ const SignIn = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full p-2 rounded bg-#4f0053 text-white border border-#4f0053 focus:outline-none focus:ring-2 focus:ring-#4f0053 focus:ring-opacity-50"
+            className="w-full p-2 rounded bg-[#4f0053] text-white border border-[#4f0053] focus:outline-none focus:ring-2 focus:ring-[#4f0053] focus:ring-opacity-50"
           />
         </div>
         <div>
@@ -61,7 +61,7 @@ const SignIn = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full p-2 rounded bg-#4f0053 text-white border border-#4f0053 focus:outline-none focus:ring-2 focus:ring-#4f0053 focus:ring-opacity-50"
+            className="w-full p-2 rounded bg-[#4f0053] text-white border border-[#4f0053] focus:outline-none focus:ring-2 focus:ring-[#4f0053] focus:ring-opacity-50"
           />
         </div>
         <Button
@@ -73,7 +73,7 @@ const SignIn = () => {
         <div className="mt-4 text-center">
           <a
             href="/signup"
-            className="text-white hover:text-#c007bc transition-colors duration-200"
+            className="text-white hover:text-[#c007bc] transition-colors duration-200"
           >
             Cadastre-se
           </a>
