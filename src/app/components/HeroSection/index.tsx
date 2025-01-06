@@ -22,7 +22,7 @@ export default function HeroSection() {
           size="lg"
           className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg transform transition-transform hover:scale-105"
         >
-          Reserve Sua Estadia
+          Acesso exclusivo para corretores
         </Button>
       </div>
     </section>

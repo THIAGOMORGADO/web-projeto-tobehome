@@ -11,10 +11,10 @@ export default function Header() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <header className="bg-gradient-to-r from-purple-800 to-indigo-800 text-white shadow-lg">
+    <header className="bg-[#341A72] text-white shadow-lg">
       <nav className="container mx-auto px-8 py-5">
         <div className="flex justify-between items-center">
-          <div className="text-4xl font-bold tracking-tight">To Be Home</div>
+          <div className="text-2xl font-bold tracking-tight">To Be Home</div>
           <div className="hidden md:flex items-center justify-between flex-grow ml-8">
             <div className="flex items-center justify-center space-x-8">
               <Link
@@ -45,11 +45,15 @@ export default function Header() {
             <div className="flex items-center space-x-6">
               <Button
                 variant="outline"
-                className="text-white border border-white bg-black"
+                className="text-white bg-black border-0 "
               >
                 Fazer login
               </Button>
-              <Button variant="secondary" className="bg-black text-white">
+
+              <Button
+                variant="secondary"
+                className="bg-black text-white border-0 "
+              >
                 Reservar Agora
               </Button>
             </div>
@@ -89,18 +93,18 @@ export default function Header() {
               >
                 Contato
               </Link>
-              <div className="flex flex-col space-y-5 mt-3">
+              <div className="flex flex-col space-y-3 mt-3">
                 <Button
                   variant="outline"
-                  className="border-white text-white bg-black"
+                  className="border-0  text-white bg-black py-2 px-4 rounded-lg hover:bg-white hover:text-black transition-colors duration-300"
                 >
                   Login
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-white text-white bg-black"
+                  className="border-0 text-white bg-black py-2 px-4 rounded-lg  hover:text-black transition-colors"
                 >
-                  Reservar Agora
+                  Reserve Sua Estadia
                 </Button>
               </div>
             </div>
