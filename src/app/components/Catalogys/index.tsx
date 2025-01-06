@@ -11,7 +11,7 @@ export default function Catalog() {
           Explore Nossos Catálogos
         </h2>
         <Tabs defaultValue="temporada" className="w-full container">
-          <TabsList className="mx-auto flex flex-wrap justify-center space-x-4 sm:space-x-10 mb-12">
+          <TabsList className="mx-auto flex flex-wrap justify-center space-x-4 sm:space-x-10 mb-20">
             <TabsTrigger
               value="temporada"
               className="px-5 py-3 text-base sm:text-lg font-medium text-primary bg-white rounded-full shadow-md hover:bg-primary hover:text-white transition-all transform hover:scale-110"
