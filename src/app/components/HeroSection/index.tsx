@@ -16,7 +16,7 @@ export default function HeroSection() {
           Bem-vindo ao To Be Home
         </h1>
         <p className="text-xl md:text-2xl mb-8 drop-shadow-md">
-          Coloca assim corretor cadastre seu imóvel de temporada
+          Corretor cadastre seu imóvel de temporada
         </p>
         <Button
           size="lg"
