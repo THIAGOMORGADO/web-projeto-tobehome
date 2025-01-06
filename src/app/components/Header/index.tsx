@@ -4,17 +4,25 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const handleSignIn = () => {
+    router.push("/signin");
+  };
 
   return (
     <header className="bg-[#341A72] text-white shadow-lg">
       <nav className="container mx-auto sm:px-28 px-8 py-5">
         <div className="flex justify-between items-center">
-          <div className="text-2xl font-bold tracking-tight">To Be Home</div>
+          <Link href="/">
+            <img src="/path/to/logo.png" alt="Logo" className="h-10" />
+          </Link>
           <div className="hidden md:flex items-center justify-between flex-grow ml-8">
             <div className="flex items-center justify-center space-x-8">
               <Link
@@ -45,14 +53,15 @@ export default function Header() {
             <div className="flex items-center space-x-6">
               <Button
                 variant="outline"
-                className="text-white bg-black border-0 "
+                className="text-white bg-black border-0"
+                onClick={handleSignIn}
               >
                 Fazer login
               </Button>
 
               <Button
                 variant="secondary"
-                className="bg-black text-white border-0 "
+                className="bg-black text-white border-0"
               >
                 Reservar Agora
               </Button>
@@ -96,13 +105,14 @@ export default function Header() {
               <div className="flex flex-col space-y-3 mt-3">
                 <Button
                   variant="outline"
-                  className="border-0  text-white bg-black py-2 px-4 rounded-lg hover:bg-white hover:text-black transition-colors duration-300"
+                  className="border-0 text-white bg-black py-2 px-4 rounded-lg hover:bg-white hover:text-black transition-colors duration-300"
+                  onClick={handleSignIn}
                 >
                   Login
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-0 text-white bg-black py-2 px-4 rounded-lg  hover:text-black transition-colors"
+                  className="border-0 text-white bg-black py-2 px-4 rounded-lg hover:text-black transition-colors"
                 >
                   Reserve Sua Estadia
                 </Button>

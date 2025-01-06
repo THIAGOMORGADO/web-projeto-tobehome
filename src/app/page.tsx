@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import GallerySection from "./components/Gallery";
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
+import Dashboard from "./dashboard/page";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         <Catalog />
         <GallerySection />
         <BookingForm />
+        <Dashboard />
         <Footer />
       </main>
     </>
