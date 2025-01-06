@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <header className="bg-[#341A72] text-white shadow-lg">
-      <nav className="container mx-auto px-8 py-5">
+      <nav className="container mx-auto sm:px-28 px-8 py-5">
         <div className="flex justify-between items-center">
           <div className="text-2xl font-bold tracking-tight">To Be Home</div>
           <div className="hidden md:flex items-center justify-between flex-grow ml-8">
