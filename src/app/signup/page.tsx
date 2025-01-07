@@ -75,7 +75,8 @@ export default function SignUp() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="light">Corretor</SelectItem>
-                    <SelectItem value="dark">cliente</SelectItem>
+                    <SelectItem value="dark">Proprietario</SelectItem>
+                    <SelectItem value="dark">Usuario</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
