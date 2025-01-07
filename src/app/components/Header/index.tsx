@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 
+import Logo from "@/app/assets/logo.jpg";
+import Image from "next/image";
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
@@ -17,12 +20,17 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-[#341A72] text-white shadow-lg">
+    <header className="bg-[#030142] text-white shadow-lg">
       <nav className="container mx-auto sm:px-28 px-8 py-5">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center gap-5">
           <Link href="/">
-            <img src="/path/to/logo.png" alt="Logo" className="h-10" />
+            <Image
+              src={Logo}
+              alt="Logo"
+              className="sm:h-15 sm:w-15 w-10 h-10"
+            />
           </Link>
+          <h4 className="text-lg font-semibold">To Be Home</h4>
           <div className="hidden md:flex items-center justify-between flex-grow ml-8">
             <div className="flex items-center justify-center space-x-8">
               <Link
