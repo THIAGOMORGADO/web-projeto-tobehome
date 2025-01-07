@@ -8,7 +8,7 @@ type InputProps = {
   id: string;
   placeholder: string;
   label: string;
-  className: string;
+  className?: string;
 };
 
 export function TextInput({

@@ -63,16 +63,6 @@ export default function SignUp() {
                   className="w-full"
                 />
               </div>
-
-              <div className="space-y-4">
-                <TextInput
-                  label="CRECI"
-                  placeholder="Ex: 123456"
-                  type="text"
-                  id="creci"
-                  className="w-full"
-                />
-              </div>
             </form>
           </CardContent>
 
