@@ -10,18 +10,9 @@ type InputProps = {
   id: string;
   placeholder: string;
   label: string;
-  value: string;
-  onChange: () => void;
 };
 
-export function TextInput({
-  placeholder,
-  type,
-  id,
-  label,
-  value,
-  onChange,
-}: InputProps) {
+export function TextInput({ placeholder, type, id, label }: InputProps) {
   return (
     <div className="flex flex-col items-start gap-2 w-full max-w-sm">
       <Label htmlFor={id} className="text-sm font-medium text-gray-700">
@@ -34,8 +25,6 @@ export function TextInput({
           id={id}
           placeholder={placeholder}
           className="p-2 w-full border-none focus:ring-blue-500 focus:border-blue-500"
-          value={value}
-          onChange={onChange}
         />
       </div>
     </div>

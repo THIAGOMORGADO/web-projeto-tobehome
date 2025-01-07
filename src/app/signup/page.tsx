@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import {
@@ -29,8 +28,6 @@ export default function SignUp() {
                 placeholder="Nome"
                 type="name"
                 id="name"
-                value={name}
-                onChange={(e: any) => setName(e.target.value)}
               />
             </div>
           </form>
