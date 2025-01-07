@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 
 interface TextInputProps {
@@ -5,8 +6,6 @@ interface TextInputProps {
   placeholder?: string;
   type?: string;
   id: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const TextInput: React.FC<TextInputProps> = ({
@@ -14,8 +13,6 @@ export const TextInput: React.FC<TextInputProps> = ({
   placeholder,
   type = "text",
   id,
-  value,
-  onChange,
 }) => {
   return (
     <div>
@@ -26,8 +23,6 @@ export const TextInput: React.FC<TextInputProps> = ({
         id={id}
         type={type}
         placeholder={placeholder}
-        value={value}
-        onChange={onChange}
         className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
       />
     </div>
