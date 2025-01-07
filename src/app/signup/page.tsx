@@ -20,6 +20,7 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [selectedAccountType, setSelectedAccountType] = useState<string>("");
+  const [creci, setCreci] = useState("");
 
   const routes = useRouter();
 
@@ -30,6 +31,11 @@ export default function SignUp() {
   function handleNextSteps() {
     if (!name || !email || !password || !selectedAccountType) {
       alert("Todos os campos são obrigatórios.");
+      return;
+    }
+
+    if (selectedAccountType === "corretor" && !creci) {
+      alert("O campo CRECI é obrigatório para corretores.");
       return;
     }
 
@@ -119,6 +125,8 @@ export default function SignUp() {
                     type="text"
                     id="creci"
                     className="w-full"
+                    onChange={(e) => setCreci(e.target.value)}
+                    value={creci}
                   />
                 </div>
               ) : null}
