@@ -9,14 +9,6 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
 import { TextInput } from "../_components/Input";
 
 import { Button } from "@/components/ui/button";
@@ -24,7 +16,11 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function SignUp() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [selectedAccountType, setSelectedAccountType] = useState<string>("");
+
   const routes = useRouter();
 
   const handleAccountTypeChange = (value: string) => {
@@ -32,7 +28,20 @@ export default function SignUp() {
   };
 
   function handleNextSteps() {
-    console.log(selectedAccountType);
+    if (!name || !email || !password || !selectedAccountType) {
+      alert("Todos os campos são obrigatórios.");
+      return;
+    }
+
+    // Simulate a registration process
+    // This is a placeholder for actual registration logic
+    console.log(
+      `Registering user: ${name}, Email: ${email}, Password: ${password}, Account Type: ${selectedAccountType}`
+    );
+    alert(`Quase finalizando!!`);
+
+    // Redirect to the next step
+    routes.push("/singup2");
   }
 
   return (
@@ -51,9 +60,10 @@ export default function SignUp() {
                 <TextInput
                   label="Nome"
                   placeholder="Nome"
-                  type="name"
+                  type="text"
                   id="name"
-                  className=""
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
                 />
               </div>
 
@@ -61,9 +71,10 @@ export default function SignUp() {
                 <TextInput
                   label="Email"
                   placeholder="Digite seu email"
-                  type="mail"
+                  type="email"
                   id="mail"
-                  className=""
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
                 />
               </div>
 
@@ -72,8 +83,10 @@ export default function SignUp() {
                   label="Senha"
                   placeholder="Senha"
                   type="password"
-                  id="pass"
+                  id="password"
                   className=""
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
                 />
               </div>
 
@@ -81,7 +94,7 @@ export default function SignUp() {
                 <select
                   value={selectedAccountType}
                   onChange={(e) => handleAccountTypeChange(e.target.value)}
-                  className="form-select block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="form-select block w-full mt-1 border-zinc-800 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white text-gray-900"
                 >
                   <option value="" disabled className="text-gray-600">
                     Selecione o tipo de conta

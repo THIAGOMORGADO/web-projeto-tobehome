@@ -9,6 +9,8 @@ type InputProps = {
   placeholder: string;
   label: string;
   className?: string;
+  value: string;
+  onChange: () => void;
 };
 
 export function TextInput({
@@ -17,6 +19,8 @@ export function TextInput({
   id,
   label,
   className,
+  value,
+  onChange,
 }: InputProps) {
   return (
     <div className={className}>
@@ -29,6 +33,8 @@ export function TextInput({
           id={id}
           placeholder={placeholder}
           className={className}
+          value={value}
+          onChange={onChange}
         />
       </div>
     </div>
