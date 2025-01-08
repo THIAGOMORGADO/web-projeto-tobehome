@@ -15,23 +15,15 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+import { useFormContext, FormActions } from "@/app/context/FormContext";
+
 export default function SignUp2() {
-  const [street, setStreet] = useState("");
-  const [number, setNumber] = useState("");
-  const [neighborhood, setNeighborhood] = useState("");
-  const [city, setCity] = useState<string>("");
-  const [state, setState] = useState("");
-  const [zipCode, setZipCode] = useState("");
+  const { state, dispatch } = useFormContext();
 
   const routes = useRouter();
 
   function handleNextSteps() {
-    if (!street || !number || !neighborhood || !city || !state || !zipCode) {
-      alert("Todos os campos de endereço são obrigatórios.");
-      return;
-    }
-
-    routes.push("/signin");
+    routes.push("/dashboard");
   }
 
   return (
@@ -40,14 +32,14 @@ export default function SignUp2() {
         <Card className="w-full max-w-md">
           <CardHeader>
             <CardTitle className="text-2xl font-bold">
-              Cadastro de Cliente
+              Cadastro de Cliente, {state.name}
             </CardTitle>
             <CardDescription>
               Preencha os campos abaixo para cadastrar um novo cliente.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form className="space-y-4">
+            {/* <form className="space-y-4">
               <div className="space-y-2">
                 <TextInput
                   label="Rua"
@@ -125,7 +117,20 @@ export default function SignUp2() {
                   value={zipCode}
                 />
               </div>
-            </form>
+            </form> */}
+
+            <div className="">
+              {state.name}
+              <br />
+              {state.email}
+              <br />
+              {state.senha}
+              <br />
+              {state.provider}
+              <br />
+              {state.creci}
+              <br />
+            </div>
           </CardContent>
 
           <CardFooter>

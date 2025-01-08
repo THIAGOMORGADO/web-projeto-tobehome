@@ -11,15 +11,25 @@ import Image from "next/image";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const routes = useRouter();
+  //  const routes = useRouter();
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    // Lógica para autenticação
-    console.log("Email:", email);
-    console.log("Password:", password);
 
-    routes.push("/dashboard");
+    try {
+      const response = await fetch("/api/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await response.json();
+
+      console.log(data);
+    } catch (err) {
+      console.log("Error", err);
+    }
   };
 
   return (

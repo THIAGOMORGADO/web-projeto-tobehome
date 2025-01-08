@@ -145,6 +145,12 @@ const SelectSeparator = React.forwardRef<
 ));
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
+type SelectProps = {
+  value: string;
+  onChange: (value: string) => void;
+  children: React.ReactNode;
+};
+
 const CustomSelect: React.FC<SelectProps> = ({ value, onChange, children }) => {
   return (
     <SelectPrimitive.Root value={value} onValueChange={onChange}>
