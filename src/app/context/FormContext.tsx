@@ -1,6 +1,5 @@
 "use client";
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { ReactNode } from "react";
 import { createContext, useContext, useReducer } from "react";
 
@@ -11,11 +10,17 @@ type State = {
   senha: string;
   provider: string;
   creci: string;
+  Street: string;
+  Number: string;
+  Neighborhood: string;
+  City: string;
+  State: string;
+  ZipCode: string;
 };
 
 type Action = {
   type: FormActions;
-  payload: any;
+  payload: unknown;
 };
 
 type ContextType = {
@@ -34,6 +39,12 @@ const initialData: State = {
   senha: "",
   provider: "",
   creci: "",
+  Street: "",
+  Number: "",
+  Neighborhood: "",
+  City: "",
+  State: "",
+  ZipCode: "",
 };
 
 // Context
@@ -46,6 +57,12 @@ export enum FormActions {
   setSenha,
   setProvider,
   setCreci,
+  setStreet,
+  setNumber,
+  setNeighborhood,
+  setCity,
+  setState,
+  setZipCode,
 }
 
 const formReduder = (state: State, action: Action) => {
@@ -65,6 +82,20 @@ const formReduder = (state: State, action: Action) => {
       return { ...state, provider: action.payload };
     case FormActions.setCreci:
       return { ...state, creci: action.payload };
+
+    case FormActions.setStreet:
+      return { ...state, Street: action.payload };
+
+    case FormActions.setNumber:
+      return { ...state, Number: action.payload };
+    case FormActions.setNeighborhood:
+      return { ...state, Neighborhood: action.payload };
+    case FormActions.setCity:
+      return { ...state, City: action.payload };
+    case FormActions.setState:
+      return { ...state, State: action.payload };
+    case FormActions.setZipCode:
+      return { ...state, ZipCode: action.payload };
     default:
       return state;
   }

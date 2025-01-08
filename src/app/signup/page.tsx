@@ -23,42 +23,42 @@ export default function SignUp() {
   console.log(corretorSelected);
 
   const onSubmit: SubmitHandler<User> = (data) => {
-    if (!data.name || !data.mail || !data.password || !data.provider) {
-      alert("Preencha todos os campos");
-      return;
-    }
-
-    dispatch({
-      type: FormActions.setName,
-      payload: data.name,
-    });
-    dispatch({
-      type: FormActions.setEmail,
-      payload: data.mail,
-    });
-    dispatch({
-      type: FormActions.setSenha,
-      payload: data.password,
-    });
-    dispatch({
-      type: FormActions.setProvider,
-      payload: data.provider,
-    });
-
-    if (data.provider === "corretor") {
-      if (!data.creci) {
-        alert("O campo CRECI é obrigatório para corretores.");
-        return;
+    if (
+      state.name &&
+      state.email &&
+      state.senha &&
+      state.provider &&
+      (data.provider !== "corretor" || data.creci)
+    ) {
+      routes.push("/signup2");
+    } else {
+      dispatch({
+        type: FormActions.setName,
+        payload: data.name,
+      });
+      dispatch({
+        type: FormActions.setEmail,
+        payload: data.mail,
+      });
+      dispatch({
+        type: FormActions.setSenha,
+        payload: data.password,
+      });
+      dispatch({
+        type: FormActions.setProvider,
+        payload: data.provider,
+      });
+      if (data.provider === "corretor") {
+        if (!data.creci) {
+          alert("O campo CRECI é obrigatório.");
+          return;
+        }
       }
       dispatch({
         type: FormActions.setCreci,
         payload: data.creci,
       });
     }
-
-    console.log(state);
-
-    routes.push("/signup2");
   };
 
   return (

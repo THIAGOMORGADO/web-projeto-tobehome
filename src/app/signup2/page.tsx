@@ -9,21 +9,43 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 
-import { TextInput } from "../_components/Input";
 import { Button } from "@/components/ui/button";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { useFormContext, FormActions } from "@/app/context/FormContext";
+import { useForm } from "react-hook-form";
+import { User } from "../types/UserType";
 
 export default function SignUp2() {
+  const { register, handleSubmit } = useForm<User>();
+
   const { state, dispatch } = useFormContext();
 
   const routes = useRouter();
 
-  function handleNextSteps() {
-    routes.push("/dashboard");
+  function onSubmit(data: User) {
+    if (
+      state.Street &&
+      state.Number &&
+      state.Neighborhood &&
+      state.City &&
+      state.State &&
+      state.ZipCode
+    ) {
+      routes.push("/dashboard");
+    } else {
+      dispatch({ type: FormActions.setStreet, payload: data.rua });
+      dispatch({ type: FormActions.setNumber, payload: data.numero });
+      dispatch({ type: FormActions.setNeighborhood, payload: data.bairro });
+      dispatch({ type: FormActions.setCity, payload: data.cidade });
+      dispatch({ type: FormActions.setState, payload: data.estado });
+      dispatch({ type: FormActions.setZipCode, payload: data.cep });
+    }
+
+    console.log(state);
+
+    // routes.push("/dashboard");
   }
 
   return (
@@ -32,115 +54,72 @@ export default function SignUp2() {
         <Card className="w-full max-w-md">
           <CardHeader>
             <CardTitle className="text-2xl font-bold">
-              Cadastro de Cliente, {state.name}
+              <div className="flex flex-row justify-between">
+                <p>Cadastro de Cliente,</p>
+                <p>{state.currentStep}</p>
+              </div>
             </CardTitle>
             <CardDescription>
-              Preencha os campos abaixo para cadastrar um novo cliente.
+              Informe os seu dados de localização
             </CardDescription>
           </CardHeader>
           <CardContent>
-            {/* <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
               <div className="space-y-2">
-                <TextInput
-                  label="Rua"
-                  placeholder="Rua"
-                  type="text"
-                  id="street"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setStreet(e.target.value)
-                  }
-                  value={street}
+                <label htmlFor="">Endereço</label>
+                <input
+                  className="w-full h-13 border-2 border-zinc-700 p-2 rounded-md"
+                  {...register("rua")}
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="">Numero</label>
+                <input
+                  className="w-full h-13 border-2 border-zinc-700 p-2 rounded-md"
+                  {...register("numero")}
                 />
               </div>
 
               <div className="space-y-2">
-                <TextInput
-                  label="Número"
-                  placeholder="Número"
+                <label htmlFor="">Bairro</label>
+                <input
                   type="text"
-                  id="number"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setNumber(e.target.value)
-                  }
-                  value={number}
+                  className="w-full h-13 border-2 border-zinc-700 p-2 rounded-md"
+                  {...register("bairro")}
                 />
               </div>
-
               <div className="space-y-2">
-                <TextInput
-                  label="Bairro"
-                  placeholder="Bairro"
+                <label htmlFor="">Cidade</label>
+                <input
                   type="text"
-                  id="neighborhood"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setNeighborhood(e.target.value)
-                  }
-                  value={neighborhood}
+                  className="w-full h-13 border-2 border-zinc-700 p-2 rounded-md"
+                  {...register("cidade")}
                 />
               </div>
-
               <div className="space-y-2">
-                <TextInput
-                  label="Cidade"
-                  placeholder="Cidade"
+                <label htmlFor="">Estado</label>
+                <input
                   type="text"
-                  id="city"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setCity(e.target.value)
-                  }
-                  value={city}
+                  className="w-full h-13 border-2 border-zinc-700 p-2 rounded-md"
+                  {...register("estado")}
                 />
               </div>
-
               <div className="space-y-2">
-                <TextInput
-                  label="Estado"
-                  placeholder="Estado"
+                <label htmlFor="">CEP</label>
+                <input
                   type="text"
-                  id="state"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setState(e.target.value)
-                  }
-                  value={state}
+                  className="w-full h-13 border-2 border-zinc-700 p-2 rounded-md"
+                  {...register("cep")}
                 />
               </div>
 
-              <div className="space-y-2">
-                <TextInput
-                  label="CEP"
-                  placeholder="CEP"
-                  type="text"
-                  id="zipCode"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setZipCode(e.target.value)
-                  }
-                  value={zipCode}
-                />
-              </div>
-            </form> */}
-
-            <div className="">
-              {state.name}
-              <br />
-              {state.email}
-              <br />
-              {state.senha}
-              <br />
-              {state.provider}
-              <br />
-              {state.creci}
-              <br />
-            </div>
+              <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
+                Próximo
+              </Button>
+            </form>
           </CardContent>
 
-          <CardFooter>
-            <Button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
-              onClick={handleNextSteps}
-            >
-              Próximo
-            </Button>
-          </CardFooter>
+          <CardFooter></CardFooter>
         </Card>
       </div>
     </>
