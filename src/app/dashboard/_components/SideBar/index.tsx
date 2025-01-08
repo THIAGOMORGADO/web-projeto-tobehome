@@ -16,6 +16,9 @@ import { HomeIcon, Settings, HousePlus } from "lucide-react";
 import { usePathname } from "next/navigation";
 import React from "react";
 import UserDropdowm from "../UserDropdown";
+import Image from "next/image";
+
+import Logo from "@/app/assets/logo.jpg";
 
 export default function Main_SideBar() {
   const pathname = usePathname();
@@ -26,9 +29,9 @@ export default function Main_SideBar() {
 
   return (
     <div>
-      <SideBar>
+      <SideBar className="bg-[#050042]">
         <SideBarHeader className="">
-          <h1>Ola</h1>
+          <Image src={Logo} alt="logo" className="w-40 h-40 rounded-sm" />
         </SideBarHeader>
         <SideBarMain className="flex flex-col flex-grow">
           <SideBarNav>
