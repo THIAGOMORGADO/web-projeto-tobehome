@@ -45,11 +45,7 @@ export default function SignUp() {
   const onSubmit: SubmitHandler<User> = (data) => {
     console.log("isso aqui foi trzido do data", data);
 
-    dispatch({ type: FormActions.setName, payload: newData.nome });
-    dispatch({ type: FormActions.setEmail, payload: newData.email });
-    dispatch({ type: FormActions.setSenha, payload: newData.senha });
-    dispatch({ type: FormActions.setProvider, payload: newData.provider });
-    dispatch({ type: FormActions.setCreci, payload: newData.creci });
+    dispatch({ type: FormActions.setName, payload: data.name });
 
     console.log("Aqui e valor do state do contexto", state);
   };

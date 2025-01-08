@@ -24,6 +24,13 @@ export function SideBar({ className, children }: SideBarGenericProps) {
 export function SideBarHeader({ className, children }: SideBarGenericProps) {
   return <header className={cn("p-6", className)}>{children}</header>;
 }
+
+export function SideBarHeaderMain({
+  className,
+  children,
+}: SideBarGenericProps) {
+  return <main className={cn("p-6", className)}>{children}</main>;
+}
 export function SideBarHeaderTitle({
   className,
   children,
@@ -65,17 +72,23 @@ export function SideBarNavMain({ className, children }: SideBarGenericProps) {
 
 type SidebarNavLinkProps = {
   href: string;
+  active?: boolean;
 };
 
 export function SideBarNavLink({
   className,
   children,
   href,
+  active,
 }: SideBarGenericProps<SidebarNavLinkProps>) {
   return (
     <Link
       href={href}
-      className={cn("text-[#500052] text-sm px-3 py-2", className)}
+      className={cn(
+        "text-[#500052] text-xs px-3 py-2 rounded-md flex items-center gap-2",
+        active && "bg-secondary",
+        className
+      )}
     >
       {children}
     </Link>
