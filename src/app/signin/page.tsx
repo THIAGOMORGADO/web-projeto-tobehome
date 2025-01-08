@@ -3,15 +3,15 @@
 // SignIn.js
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-//import { useRouter } from "next/navigation";
 
 import Logo from "@/app/assets/logo.jpg";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //  const routes = useRouter();
+  const routes = useRouter();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -25,8 +25,7 @@ const SignIn = () => {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
-
-      console.log(data);
+      routes.push("/dashboard");
     } catch (err) {
       console.log("Error", err);
     }
