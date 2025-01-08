@@ -13,12 +13,12 @@ import {
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
-    <div className="grid grid-cols-[16rem_1fr] gap-4">
+    <div className="grid grid-cols-[14rem_1fr] ">
       <SideBar>
         <SideBarHeader>
           <h1>Informação</h1>
         </SideBarHeader>
-        <SideBarMain>
+        <SideBarMain className="flex flex-col flex-grow">
           <SideBarNav>
             <SideBarNavMain>
               <SideBarNavLink href="/dashboard">Inicio</SideBarNavLink>
@@ -28,15 +28,14 @@ export default function Layout({ children }: PropsWithChildren) {
             </SideBarNavMain>
           </SideBarNav>
 
-          <SideBarNav>
-            <SideBarHeader>
-              <SideBarNavHeader>
-                <SideBarNavHeaderTitle>LIstagem de link</SideBarNavHeaderTitle>
-              </SideBarNavHeader>
-            </SideBarHeader>
+          <SideBarNav className="mt-auto">
+            <SideBarNavHeader>
+              <SideBarNavHeaderTitle>LIstagem de link</SideBarNavHeaderTitle>
+            </SideBarNavHeader>
+
             <SideBarNav>
               <SideBarNavLink href="/dashboard/help">
-                Precisa de ajuda...
+                Precisa de ajuda
               </SideBarNavLink>
               <SideBarNavLink href="/">Nosso Site</SideBarNavLink>
             </SideBarNav>

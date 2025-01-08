@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import {
@@ -10,55 +11,47 @@ import {
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { User } from "../types/UserType";
-import { useRouter } from "next/navigation";
+//import { useRouter } from "next/navigation";
 import { useFormContext, FormActions } from "@/app/context/FormContext";
+//import { DialogDescription } from "@radix-ui/react-dialog";
 
 export default function SignUp() {
   const { register, handleSubmit, watch } = useForm<User>();
   const { state, dispatch } = useFormContext();
-  const routes = useRouter();
+  // const routes = useRouter();
 
   const corretorSelected = watch("provider") === "corretor";
 
   console.log(corretorSelected);
 
+  // primeiro vc captura os dados!
+  //depois que vc TEM os dados... a funcao de submit que significa enviar leva os dados que vc JA TEM
+
+  const nome = watch("name");
+  const email = watch("mail");
+  const senha = watch("password");
+  const creci = watch("creci");
+
+  const newData = {
+    nome,
+    email,
+    senha,
+    provider: watch("provider"),
+    creci,
+  };
+
+  console.log(newData);
+
   const onSubmit: SubmitHandler<User> = (data) => {
-    if (
-      state.name &&
-      state.email &&
-      state.senha &&
-      state.provider &&
-      (data.provider !== "corretor" || data.creci)
-    ) {
-      routes.push("/signup2");
-    } else {
-      dispatch({
-        type: FormActions.setName,
-        payload: data.name,
-      });
-      dispatch({
-        type: FormActions.setEmail,
-        payload: data.mail,
-      });
-      dispatch({
-        type: FormActions.setSenha,
-        payload: data.password,
-      });
-      dispatch({
-        type: FormActions.setProvider,
-        payload: data.provider,
-      });
-      if (data.provider === "corretor") {
-        if (!data.creci) {
-          alert("O campo CRECI é obrigatório.");
-          return;
-        }
-      }
-      dispatch({
-        type: FormActions.setCreci,
-        payload: data.creci,
-      });
-    }
+    console.log("isso aqui foi trzido do data", data);
+
+    dispatch({ type: FormActions.setName, payload: newData.nome });
+    dispatch({ type: FormActions.setEmail, payload: newData.email });
+    dispatch({ type: FormActions.setSenha, payload: newData.senha });
+    dispatch({ type: FormActions.setProvider, payload: newData.provider });
+    dispatch({ type: FormActions.setCreci, payload: newData.creci });
+
+    console.log("Aqui e valor do state do contexto", state);
   };
 
   return (
@@ -66,9 +59,7 @@ export default function SignUp() {
       <div className="flex items-center justify-center min-h-screen bg-[#030142]">
         <Card className="w-full max-w-md">
           <CardHeader>
-            <CardTitle className="text-2xl font-bold">
-              Criar Conta, {state.name}
-            </CardTitle>
+            <CardTitle className="text-2xl font-bold">Criar Conta,</CardTitle>
             <CardDescription>
               Preencha os campos abaixo para se cadastrar.
             </CardDescription>
