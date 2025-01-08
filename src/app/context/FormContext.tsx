@@ -1,109 +1,71 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+import { useState } from "react";
+import { useForm, FormProvider } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 
-import { ReactNode } from "react";
-import { createContext, useContext, useReducer } from "react";
+import Step1 from "@/app/signup/page";
+import Step2 from "@/app/signup2/page";
 
-type State = {
-  name: string;
-  email: string;
-  senha: string;
-  provider: string;
-  creci: string;
-  Street: string;
-  Number: string;
-  Neighborhood: string;
-  City: string;
-  State: string;
-  ZipCode: string;
+// Define os schemas para cada etapa
+const stepSchemas = [
+  z.object({
+    name: z.string().nonempty("O nome é obrigatório."),
+    email: z.string().email("Insira um e-mail válido."),
+    phone: z.string().nonempty("O telefone é obrigatório."),
+  }),
+  z.object({
+    age: z.number().min(18, "Você deve ter pelo menos 18 anos."),
+    address: z.string().nonempty("O endereço é obrigatório."),
+    city: z.string().nonempty("A cidade é obrigatória."),
+  }),
+  z.object({
+    confirmation: z.literal(true, {
+      errorMap: () => ({ message: "Você deve aceitar os termos." }),
+    }),
+    notes: z.string().optional(),
+  }),
+];
+
+// Combina os schemas para validação completa no final
+const combinedSchema = stepSchemas.reduce(
+  (acc, curr) => acc.merge(curr),
+  z.object({})
+);
+
+const MultiStepForm = () => {
+  const [step, setStep] = useState(0);
+  const [formData, setFormData] = useState({}); // Armazena os dados de todas as etapas
+  const isLastStep = step === stepSchemas.length - 1;
+
+  // Configuração do React Hook Form
+  const methods = useForm({
+    resolver: zodResolver(isLastStep ? combinedSchema : stepSchemas[step]),
+    mode: "onChange",
+    defaultValues: formData, // Define os valores padrão para manter os dados
+  });
+
+  const onSubmit = (data: Record<string, any>) => {
+    // Atualiza o estado com os dados da etapa atual
+    setFormData((prev) => ({ ...prev, ...data }));
+
+    if (!isLastStep) {
+      // Vai para a próxima etapa
+      setStep((prev) => prev + 1);
+    } else {
+      // Envia os dados finais
+      console.log("Dados do formulário:", { ...formData, ...data });
+    }
+  };
+
+  const onBack = ({ children }) => {
+    if (step > 0) setStep((prev) => prev - 1);
+  };
+
+  const steps = [<Step1 key="step1" />, <Step2 key="step2" />];
+
+  return <FormProvider {...methods}>{children}</FormProvider>;
 };
 
-type Action = {
-  type: FormActions;
-  payload: any; // Changed from unknown to string for better type safety
-};
-
-type ContextType = {
-  state: State;
-  dispatch: (action: Action) => void;
-};
-
-type FromProviderProps = {
-  children: ReactNode;
-};
-
-const initialData: State = {
-  name: "",
-  email: "",
-  senha: "",
-  provider: "",
-  creci: "",
-  Street: "",
-  Number: "",
-  Neighborhood: "",
-  City: "",
-  State: "",
-  ZipCode: "",
-};
-
-// Context
-const FormContext = createContext<ContextType | undefined>(undefined);
-
-export enum FormActions {
-  setName,
-  setEmail,
-  setSenha,
-  setProvider,
-  setCreci,
-  setStreet,
-  setNumber,
-  setNeighborhood,
-  setCity,
-  setState,
-  setZipCode,
-}
-
-const formReducer = (state: State, action: Action): State => {
-  switch (action.type) {
-    case FormActions.setName:
-      return { ...state, name: action.payload };
-    case FormActions.setEmail:
-      return { ...state, email: action.payload };
-    case FormActions.setSenha:
-      return { ...state, senha: action.payload };
-    case FormActions.setProvider:
-      return { ...state, provider: action.payload };
-    case FormActions.setCreci:
-      return { ...state, creci: action.payload };
-
-    case FormActions.setStreet:
-      return { ...state, Street: action.payload };
-
-    case FormActions.setNumber:
-      return { ...state, Number: action.payload };
-    case FormActions.setNeighborhood:
-      return { ...state, Neighborhood: action.payload };
-    case FormActions.setCity:
-      return { ...state, City: action.payload };
-    case FormActions.setState:
-      return { ...state, State: action.payload };
-    case FormActions.setZipCode:
-      return { ...state, ZipCode: action.payload };
-    default:
-      return state; // Added default case to ensure state is always returned
-  }
-};
-export const FormProvider = ({ children }: FromProviderProps) => {
-  const [state, dispatch] = useReducer(formReducer, initialData);
-  const value = { state, dispatch };
-  return <FormContext.Provider value={value}>{children}</FormContext.Provider>;
-};
-
-export const useFormContext = () => {
-  const context = useContext(FormContext);
-
-  if (context === undefined) {
-    throw new Error("userform tem que se usado no provide");
-  }
-  return context;
-};
+export default MultiStepForm;

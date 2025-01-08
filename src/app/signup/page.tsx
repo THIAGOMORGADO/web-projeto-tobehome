@@ -14,6 +14,10 @@ import { useEffect } from "react"; // Importa o hook useEffect para executar efe
 import { User } from "../types/UserType"; // Define o tipo de dados esperado no formulário
 import { useFormContext, FormActions } from "@/app/context/FormContext"; // Importa o contexto global e as ações disponíveis
 
+
+
+import { useRouter } from "next/navigation";
+
 export default function SignUp() {
   // Inicializa o formulário usando react-hook-form
   const { register, handleSubmit, watch } = useForm<User>();
@@ -44,6 +48,10 @@ export default function SignUp() {
     }
   };
 
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
   return (
     <>
       {/* Container principal com estilos para centralizar o formulário */}
@@ -61,6 +69,7 @@ export default function SignUp() {
             {/* Formulário com o método handleSubmit para processar o envio */}
             <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
               {/* Campo de Nome */}
+            <form className="space-y-4">
               <div className="space-y-2">
                 <label htmlFor="name">Nome</label>
                 <input

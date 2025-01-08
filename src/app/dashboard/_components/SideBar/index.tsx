@@ -29,9 +29,10 @@ export default function Main_SideBar() {
 
   return (
     <div>
-      <SideBar className="bg-[#050042]">
-        <SideBarHeader className="">
-          <Image src={Logo} alt="logo" className="w-40 h-40 rounded-sm" />
+      <SideBar className="">
+        <SideBarHeader className="flex items-center gap-2">
+          <Image src={Logo} alt="logo" className="w-8 h-8 rounded-sm" />
+          <h1 className="text-[#500052] font-bold text-xs">To Be Home </h1>
         </SideBarHeader>
         <SideBarMain className="flex flex-col flex-grow">
           <SideBarNav>

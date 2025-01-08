@@ -22,14 +22,18 @@ export function SideBar({ className, children }: SideBarGenericProps) {
 }
 
 export function SideBarHeader({ className, children }: SideBarGenericProps) {
-  return <header className={cn("p-6", className)}>{children}</header>;
+  return (
+    <header className={cn("p-6 py-3 border-b border-border", className)}>
+      {children}
+    </header>
+  );
 }
 
 export function SideBarHeaderMain({
   className,
   children,
 }: SideBarGenericProps) {
-  return <main className={cn("p-6", className)}>{children}</main>;
+  return <main className={cn("p-6 ", className)}>{children}</main>;
 }
 export function SideBarHeaderTitle({
   className,
@@ -39,7 +43,7 @@ export function SideBarHeaderTitle({
 }
 
 export function SideBarMain({ className, children }: SideBarGenericProps) {
-  return <main className={cn("pt-6 px-3", className)}>{children}</main>;
+  return <main className={cn("px-3", className)}>{children}</main>;
 }
 
 export function SideBarNav({ className, children }: SideBarGenericProps) {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import {
@@ -13,40 +14,10 @@ import { Button } from "@/components/ui/button";
 
 import { useRouter } from "next/navigation";
 
-import { useFormContext, FormActions } from "@/app/context/FormContext";
-import { useForm } from "react-hook-form";
-import { User } from "../types/UserType";
+import { useForm, useFormContext } from "react-hook-form";
 
 export default function SignUp2() {
-  const { register, handleSubmit } = useForm<User>();
-
-  const { state, dispatch } = useFormContext();
-
-  const routes = useRouter();
-
-  function onSubmit(data: User) {
-    if (
-      state.Street &&
-      state.Number &&
-      state.Neighborhood &&
-      state.City &&
-      state.State &&
-      state.ZipCode
-    ) {
-      routes.push("/dashboard");
-    } else {
-      dispatch({ type: FormActions.setStreet, payload: data.rua });
-      dispatch({ type: FormActions.setNumber, payload: data.numero });
-      dispatch({ type: FormActions.setNeighborhood, payload: data.bairro });
-      dispatch({ type: FormActions.setCity, payload: data.cidade });
-      dispatch({ type: FormActions.setState, payload: data.estado });
-      dispatch({ type: FormActions.setZipCode, payload: data.cep });
-    }
-
-    console.log(state);
-
-    // routes.push("/dashboard");
-  }
+  const { register } = useForm();
 
   return (
     <>
@@ -63,10 +34,11 @@ export default function SignUp2() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+            <form className="space-y-4">
               <div className="space-y-2">
-                <label htmlFor="">Endereço</label>
+                <label htmlFor="endereco">Endereço</label>
                 <input
+                  id="endereco"
                   className="w-full h-13 border-2 border-zinc-700 p-2 rounded-md"
                   {...register("rua")}
                 />
