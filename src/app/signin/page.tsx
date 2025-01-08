@@ -25,7 +25,7 @@ const SignIn = () => {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
-      routes.push("/dashboard");
+      console.log(data);
     } catch (err) {
       console.log("Error", err);
     }
