@@ -10,14 +10,12 @@ import {
   SideBarNavHeader,
   SideBarNavHeaderTitle,
   SideBarFooter,
-  SideBarHeaderMain,
 } from "@/app/_components/Dashboard/SideBar";
 import { HomeIcon, Settings, HousePlus } from "lucide-react";
-import Image from "next/image";
+
 import { usePathname } from "next/navigation";
 import React from "react";
-
-import Logo from "@/app/assets/logo.jpg";
+import UserDropdowm from "../UserDropdown";
 
 export default function Main_SideBar() {
   const pathname = usePathname();
@@ -29,28 +27,28 @@ export default function Main_SideBar() {
   return (
     <div>
       <SideBar>
-        <SideBarHeader className="bg-[#050042] flex item-center justify-center">
+        <SideBarHeader className="">
           <h1>Ola</h1>
         </SideBarHeader>
         <SideBarMain className="flex flex-col flex-grow">
           <SideBarNav>
             <SideBarNavMain>
               <SideBarNavLink href="/dashboard" active={isActive("/dashboard")}>
-                <HomeIcon />
+                <HomeIcon className="w-5 mr-5" />
                 Inicio
               </SideBarNavLink>
               <SideBarNavLink
                 href="/dashboard/settings"
                 active={isActive("/dashboard/settings")}
               >
-                <Settings />
+                <Settings className="w-5 mr-5" />
                 Configuraçoes
               </SideBarNavLink>
               <SideBarNavLink
                 href="/dashboard/addnewimovel"
                 active={isActive("/dashboard/addnewimovel")}
               >
-                <HousePlus />
+                <HousePlus className="w-5 mr-5" />
                 Cadastra um novo imovel
               </SideBarNavLink>
             </SideBarNavMain>
@@ -70,7 +68,7 @@ export default function Main_SideBar() {
           </SideBarNav>
         </SideBarMain>
         <SideBarFooter>
-          <h1>Infor do usuario</h1>
+          <UserDropdowm />
         </SideBarFooter>
       </SideBar>
     </div>

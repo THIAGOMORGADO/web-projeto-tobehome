@@ -57,7 +57,7 @@ export function SideBarNavHeaderTitle({
   return (
     <h4
       className={cn(
-        "font-medium text-xs uppercase text-muted-foreground ml-3",
+        "flex items-centerfont-medium text-xs uppercase text-muted-foreground ml-3",
         className
       )}
     >
@@ -85,7 +85,7 @@ export function SideBarNavLink({
     <Link
       href={href}
       className={cn(
-        "text-[#500052] text-xs px-3 py-2 rounded-md flex items-center gap-2",
+        " text-[#500052] text-xs px-3 py-2 rounded-md flex items-center gap-2",
         active && "bg-secondary",
         className
       )}
