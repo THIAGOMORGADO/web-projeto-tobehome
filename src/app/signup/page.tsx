@@ -17,10 +17,6 @@ import Image from "next/image";
 import Logo from "@/app/assets/logo.jpg";
 
 export default function SignUp() {
-  const { register, handleSubmit } = useForm();
-
-  const onSubmit: SubmitHandler<User> = (data) => console.log(data);
-
   return (
     <div className="flex flex-col justify-center items-center h-screen px-3">
       <MultiStepForm />

@@ -45,11 +45,11 @@ export default function MultiStepForm() {
   return (
     <Card className="w-full max-w-lg mx-auto">
       <CardHeader>
-        <CardTitle>Formulário de Múltiplas Etapas</CardTitle>
+        <CardTitle>Preencha os campos para cadastra-se</CardTitle>
         <CardDescription>
           Etapa {step} de {TOTAL_STEPS}
         </CardDescription>
-        <Progress value={progress} className="w-full mt-2" />
+        <Progress value={progress} className="w-full mt-2 bg-purple-500" />
       </CardHeader>
       <CardContent>
         {step === 1 ? (
@@ -86,14 +86,28 @@ export default function MultiStepForm() {
         )}
         <div className="flex justify-between mt-6">
           {step > 1 && (
-            <Button onClick={prevStep} variant="outline">
+            <Button
+              onClick={prevStep}
+              variant="default"
+              className="bg-purple-700 hover:bg-purple-800 text-white"
+            >
               Voltar
             </Button>
           )}
           {step < TOTAL_STEPS ? (
-            <Button onClick={nextStep}>Próximo</Button>
+            <Button
+              onClick={nextStep}
+              className="bg-purple-700 hover:bg-purple-800"
+            >
+              Próximo
+            </Button>
           ) : (
-            <Button onClick={() => console.log(formData)}>Enviar</Button>
+            <Button
+              onClick={() => console.log(formData)}
+              className="bg-purple-700 hover:bg-purple-800 text-[]"
+            >
+              Enviar
+            </Button>
           )}
         </div>
       </CardContent>

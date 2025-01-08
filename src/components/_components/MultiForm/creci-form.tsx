@@ -58,7 +58,7 @@ export default function LocationForm({
               placeholder="Insira seu CRECI"
               value={formData.creci}
               onChange={(e) => updateFormData({ creci: e.target.value })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="mt-1 block w-full rounded-md text-purple-700 hover:text-purple-600 sm:text-sm"
             />
           </div>
         )}

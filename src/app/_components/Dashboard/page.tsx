@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/lib/utils";
 
 export type DashboardPageGenericProps<T = unknown> = {
