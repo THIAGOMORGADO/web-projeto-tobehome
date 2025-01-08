@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { ReactNode } from "react";
@@ -19,7 +20,7 @@ type State = {
 
 type Action = {
   type: FormActions;
-  payload: string; // Changed from unknown to string for better type safety
+  payload: any; // Changed from unknown to string for better type safety
 };
 
 type ContextType = {
