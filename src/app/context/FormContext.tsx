@@ -4,7 +4,6 @@ import { ReactNode } from "react";
 import { createContext, useContext, useReducer } from "react";
 
 type State = {
-  currentStep: number;
   name: string;
   email: string;
   senha: string;
@@ -33,7 +32,6 @@ type FromProviderProps = {
 };
 
 const initialData: State = {
-  currentStep: 0,
   name: "",
   email: "",
   senha: "",
@@ -51,7 +49,6 @@ const initialData: State = {
 const FormContext = createContext<ContextType | undefined>(undefined);
 
 export enum FormActions {
-  setCurrentStep,
   setName,
   setEmail,
   setSenha,
@@ -65,13 +62,8 @@ export enum FormActions {
   setZipCode,
 }
 
-const formReduder = (state: State, action: Action) => {
+const formReducer = (state: State, action: Action) => {
   switch (action.type) {
-    case FormActions.setCurrentStep:
-      return {
-        ...state,
-        currentStep: action.payload,
-      };
     case FormActions.setName:
       return { ...state, name: action.payload };
     case FormActions.setEmail:
@@ -97,12 +89,10 @@ const formReduder = (state: State, action: Action) => {
     case FormActions.setZipCode:
       return { ...state, ZipCode: action.payload };
     default:
-      return state;
   }
 };
-
 export const FormProvider = ({ children }: FromProviderProps) => {
-  const [state, dispatch] = useReducer(formReduder, initialData);
+  const [state, dispatch] = useReducer(formReducer, initialData);
   const value = { state, dispatch };
   return <FormContext.Provider value={value}>{children}</FormContext.Provider>;
 };

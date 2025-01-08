@@ -56,7 +56,6 @@ export default function SignUp2() {
             <CardTitle className="text-2xl font-bold">
               <div className="flex flex-row justify-between">
                 <p>Cadastro de Cliente,</p>
-                <p>{state.currentStep}</p>
               </div>
             </CardTitle>
             <CardDescription>
