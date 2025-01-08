@@ -19,7 +19,7 @@ type State = {
 
 type Action = {
   type: FormActions;
-  payload: unknown;
+  payload: string; // Changed from unknown to string for better type safety
 };
 
 type ContextType = {
@@ -62,7 +62,7 @@ export enum FormActions {
   setZipCode,
 }
 
-const formReducer = (state: State, action: Action) => {
+const formReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case FormActions.setName:
       return { ...state, name: action.payload };
@@ -89,6 +89,7 @@ const formReducer = (state: State, action: Action) => {
     case FormActions.setZipCode:
       return { ...state, ZipCode: action.payload };
     default:
+      return state; // Added default case to ensure state is always returned
   }
 };
 export const FormProvider = ({ children }: FromProviderProps) => {
