@@ -6,7 +6,6 @@ interface AccessFormProps {
     name: string;
     email: string;
     password: string;
-    confirm: string;
   };
   updateFormData: (data: Partial<AccessFormProps["formData"]>) => void;
 }
@@ -53,19 +52,6 @@ export default function AccessForm({
           placeholder="Sua senha"
           value={formData.password}
           onChange={(e) => updateFormData({ password: e.target.value })}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-        />
-      </div>
-      <div className="space-y-2">
-        <Label htmlFor="confirm" className="text-sm font-medium text-gray-700">
-          Confirmar Senha
-        </Label>
-        <Input
-          id="confirm"
-          type="password"
-          placeholder="Confirmar senha"
-          value={formData.confirm}
-          onChange={(e) => updateFormData({ confirm: e.target.value })}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
         />
       </div>

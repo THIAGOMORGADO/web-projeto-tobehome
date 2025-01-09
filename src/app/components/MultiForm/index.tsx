@@ -14,6 +14,7 @@ import { Progress } from "@/components/ui/progress";
 import AccessForm from "./access-form";
 import LocationForm from "./location-form";
 import CreciForm from "./creci-form";
+import { axios } from "@/app/services/api";
 
 const TOTAL_STEPS = 3;
 
@@ -23,24 +24,43 @@ export default function MultiStepForm() {
     name: "",
     email: "",
     password: "",
-    confirm: "",
-
     address: "",
     city: "",
+    neighborhood: "",
+    state: "",
     country: "",
-
+    zipCode: "",
+    uf: "",
     provider: "",
     creci: "",
+    rg: "",
+    cpf: "",
+    cnpj: "",
+    birthDate: "",
   });
 
   const updateFormData = (data: Partial<typeof formData>) => {
     setFormData((prev) => ({ ...prev, ...data }));
   };
 
+  // const submitForm = async () => {
+  //   try {
+  //     await axios.get("/");
+  //     alert("Banco de dados contatado com sucesso!");
+  //   } catch (error) {
+  //     console.error("Erro ao contatar o banco de dados:", error);
+  //     alert("Erro ao contatar o banco de dados. Tente novamente mais tarde.");
+  //   }
+  // };
+
   const nextStep = () => setStep((prev) => Math.min(prev + 1, TOTAL_STEPS));
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
 
   const progress = (step / TOTAL_STEPS) * 100;
+
+  function handleNewAccounts(formData) {
+    console.log(formData);
+  }
 
   return (
     <Card className="w-full max-w-lg mx-auto">
@@ -57,7 +77,6 @@ export default function MultiStepForm() {
             formData={{
               ...formData,
               password: formData.password,
-              confirm: formData.confirm,
             }}
             updateFormData={updateFormData}
           />
@@ -67,6 +86,7 @@ export default function MultiStepForm() {
               ...formData,
               address: formData.address,
               city: formData.city,
+              state: formData.state,
               country: formData.country,
             }}
             updateFormData={updateFormData}
@@ -80,6 +100,10 @@ export default function MultiStepForm() {
                 | "Proprietario"
                 | "Usuario",
               creci: formData.creci,
+              rg: formData.rg,
+              cnpj: formData.cnpj,
+              cpf: formData.cpf,
+              birthDate: formData.birthDate,
             }}
             updateFormData={updateFormData}
           />
@@ -103,8 +127,8 @@ export default function MultiStepForm() {
             </Button>
           ) : (
             <Button
-              onClick={() => console.log(formData)}
-              className="bg-purple-700 hover:bg-purple-800 text-[]"
+              onClick={() => handleNewAccounts(formData)}
+              className="bg-purple-700 hover:bg-purple-800 text-[#FFF]"
             >
               Enviar
             </Button>
