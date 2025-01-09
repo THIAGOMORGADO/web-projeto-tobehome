@@ -58,7 +58,7 @@ export default function MultiStepForm() {
 
   const progress = (step / TOTAL_STEPS) * 100;
 
-  function handleNewAccounts(formData) {
+  function handleNewAccounts(formData: string) {
     console.log(formData);
   }
 
