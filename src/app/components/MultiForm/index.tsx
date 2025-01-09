@@ -127,7 +127,7 @@ export default function MultiStepForm() {
             </Button>
           ) : (
             <Button
-              onClick={() => handleNewAccounts(formData)}
+              onClick={() => handleNewAccounts(JSON.stringify(formData))}
               className="bg-purple-700 hover:bg-purple-800 text-[#FFF]"
             >
               Enviar
