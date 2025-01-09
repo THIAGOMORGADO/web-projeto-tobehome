@@ -14,7 +14,7 @@ import { Progress } from "@/components/ui/progress";
 import AccessForm from "./access-form";
 import LocationForm from "./location-form";
 import CreciForm from "./creci-form";
-import { axios } from "@/app/services/api";
+// import { axios } from "@/app/services/api";
 
 const TOTAL_STEPS = 3;
 
