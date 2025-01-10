@@ -28,7 +28,6 @@ export default function MultiStepForm() {
     city: "",
     neighborhood: "",
     state: "",
-    country: "",
     zipCode: "",
     uf: "",
     provider: "",
@@ -85,9 +84,9 @@ export default function MultiStepForm() {
             formData={{
               ...formData,
               address: formData.address,
-              city: formData.city,
               state: formData.state,
-              country: formData.country,
+              city: formData.city,
+              uf: formData.uf,
             }}
             updateFormData={updateFormData}
           />

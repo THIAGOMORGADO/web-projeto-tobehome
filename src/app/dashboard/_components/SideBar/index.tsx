@@ -32,7 +32,7 @@ export default function Main_SideBar() {
       <SideBar className="">
         <SideBarHeader className="flex items-center gap-2">
           <Image src={Logo} alt="logo" className="w-8 h-8 rounded-sm" />
-          <h1 className="text-[#500052] font-bold text-xs">To Be Home </h1>
+          <h1 className="text-[#FE8302] font-bold text-">To Be Home </h1>
         </SideBarHeader>
         <SideBarMain className="flex flex-col flex-grow">
           <SideBarNav>

@@ -15,7 +15,6 @@ interface LocationFormProps {
     state: string;
     zipCode: string;
     uf: string;
-    country: string;
   };
   updateFormData: (data: Partial<LocationFormProps["formData"]>) => void;
 }
@@ -24,25 +23,21 @@ export default function LocationForm({
   formData,
   updateFormData,
 }: LocationFormProps) {
-  const [county, setCounty] = useState([]);
   const [states, setState] = useState([]);
   const [uf, setUf] = useState([]);
 
   async function fetchData() {
     try {
       // Realiza as três requisições em paralelo
-      const [countyResponse, stateResponse, ufResponse] = await Promise.all([
-        LocalizationApi.get("/paises/76"),
+      const [stateResponse, ufResponse] = await Promise.all([
         LocalizationApi.get("/regioes-imediatas"),
         LocalizationApi.get("/regioes-intermediarias"),
       ]);
 
       // Atualiza os estados com as respostas
-      setCounty(countyResponse.data);
-      setState(stateResponse.data);
-      setUf(ufResponse.data.UF);
 
-      console.log("Counties:", countyResponse.data);
+      setState(stateResponse.data);
+      setUf(ufResponse.data);
       console.log("States:", stateResponse.data);
       console.log("UFs:", ufResponse.data);
     } catch (error) {
@@ -100,18 +95,18 @@ export default function LocationForm({
             htmlFor="country"
             className="text-sm font-medium text-gray-700"
           >
-            País
+            Selecione o estado
           </Label>
           <select
             id="country"
-            value={formData.country}
-            onChange={(e) => updateFormData({ country: e.target.value })}
+            value={formData.state}
+            onChange={(e) => updateFormData({ state: e.target.value })}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
           >
-            <option value="">Selecione um país</option>
-            {county?.map((city: { id: string; nome: string }) => (
-              <option key={city.nome} value={city.nome}>
-                {city.nome}
+            <option value="">Selecione o estado</option>
+            {states?.map((states: { id: string; nome: string }) => (
+              <option key={states.id} value={states.nome}>
+                {states.nome}
               </option>
             ))}
           </select>
@@ -125,18 +120,18 @@ export default function LocationForm({
           </Label>
           <select
             id="state"
-            value={formData.state}
-            onChange={(e) => updateFormData({ state: e.target.value })}
+            value={formData.city}
+            onChange={(e) => updateFormData({ city: e.target.value })}
             className="mt-1 block rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm w-[95%]"
           >
             <option value="">Selecione um país</option>
-            {states?.map((states: { id: string; nome: string }) => (
+            {states?.map((city: { id: string; nome: string }) => (
               <option
-                key={states.id}
-                value={states.nome}
+                key={city.id}
+                value={city.nome}
                 className="bg-[#f9fafb] text-[#3b82f6] p-2.5 rounded-md mb-1.25 mt-1.25"
               >
-                {states.nome}
+                {city.nome}
               </option>
             ))}
           </select>
@@ -152,15 +147,17 @@ export default function LocationForm({
             className="mt-1 block rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm w-full bg-white text-gray-700"
           >
             <option value="">Selecione uma UF</option>
-            {uf?.map((uf: { id: string; nome: string; sigla: string }) => (
-              <option
-                key={uf.id}
-                value={uf.sigla}
-                className="bg-[#f9fafb] text-[#3b82f6] p-2.5 rounded-md mb-1.25 mt-1.25"
-              >
-                {uf.sigla}
-              </option>
-            ))}
+            {uf?.map(
+              (uf: { id: string; nome: string; UF: string; sigla: string }) => (
+                <option
+                  key={uf.id}
+                  value={uf.sigla}
+                  className="bg-[#f9fafb] text-[#3b82f6] p-2.5 rounded-md mb-1.25 mt-1.25"
+                >
+                  {uf.UF.sigla}
+                </option>
+              )
+            )}
           </select>
         </div>
       </div>
