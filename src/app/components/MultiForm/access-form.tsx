@@ -26,7 +26,7 @@ export default function AccessForm({
           placeholder="Seu nome"
           value={formData.name}
           onChange={(e) => updateFormData({ name: e.target.value })}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+          className="bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302]  px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
         />
       </div>
       <div className="space-y-2">
@@ -39,7 +39,7 @@ export default function AccessForm({
           placeholder="seu@email.com"
           value={formData.email}
           onChange={(e) => updateFormData({ email: e.target.value })}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+          className="bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302]  px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
         />
       </div>
       <div className="space-y-2">
@@ -52,7 +52,7 @@ export default function AccessForm({
           placeholder="Sua senha"
           value={formData.password}
           onChange={(e) => updateFormData({ password: e.target.value })}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+          className="bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302]  px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
         />
       </div>
     </div>

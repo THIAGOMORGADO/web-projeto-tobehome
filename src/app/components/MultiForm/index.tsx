@@ -112,7 +112,7 @@ export default function MultiStepForm() {
             <Button
               onClick={prevStep}
               variant="default"
-              className="bg-purple-700 hover:bg-purple-800 text-white"
+              className="bg-purple-700 hover:bg-purple-800 text-[#FE8302]"
             >
               Voltar
             </Button>
@@ -120,14 +120,14 @@ export default function MultiStepForm() {
           {step < TOTAL_STEPS ? (
             <Button
               onClick={nextStep}
-              className="bg-purple-700 hover:bg-purple-800"
+              className="bg-purple-700 hover:bg-purple-800 text-[#FE8302]"
             >
               Próximo
             </Button>
           ) : (
             <Button
               onClick={() => handleNewAccounts(JSON.stringify(formData))}
-              className="bg-purple-700 hover:bg-purple-800 text-[#FFF]"
+              className="bg-purple-700 hover:bg-purple-800 text-[#FE8302]"
             >
               Enviar
             </Button>

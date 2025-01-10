@@ -9,7 +9,7 @@ export const Input = forwardRef<
   <BaseInput
     {...props}
     ref={ref}
-    className="border-gray-300 focus:border-purple-600 focus:ring-purple-600"
+    className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] px-2 font-normal h-8 focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
   />
 ));
 Input.displayName = "Input";

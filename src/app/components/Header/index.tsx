@@ -20,7 +20,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-[#030142] text-white shadow-lg">
+    <header className="bg-[#7e22ce] text-white shadow-lg">
       <nav className="container mx-auto sm:px-28 px-8 py-5">
         <div className="flex justify-between items-center gap-5">
           <Link href="/">
@@ -61,7 +61,7 @@ export default function Header() {
             <div className="flex items-center space-x-6">
               <Button
                 variant="outline"
-                className="text-white bg-black border-0"
+                className="text-white bg-[#7e22ce] border-0"
                 onClick={handleSignIn}
               >
                 Fazer login
@@ -69,7 +69,7 @@ export default function Header() {
 
               <Button
                 variant="secondary"
-                className="bg-black text-white border-0"
+                className="bg-[#7e22ce] text-white border-0"
               >
                 Reservar Agora
               </Button>

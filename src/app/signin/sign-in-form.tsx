@@ -17,7 +17,7 @@ function SubmitButton() {
   return (
     <Button
       type="submit"
-      className="w-full bg-purple-700 hover:bg-purple-800 text-white"
+      className="w-full bg-purple-700 hover:bg-purple-800 text-[#FE8302]"
       disabled={pending}
     >
       {pending ? "Signing in..." : "Sign In"}
@@ -50,18 +50,20 @@ export function SignInForm() {
           type="email"
           autoComplete="email"
           required
-          placeholder="Enter your email"
+          placeholder="Email"
+          className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302]  px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
         />
       </div>
       <div className="space-y-2">
-        <Label htmlFor="password">Password</Label>
+        <Label htmlFor="password">Senha</Label>
         <Input
           id="password"
           name="password"
           type="password"
           autoComplete="current-password"
           required
-          placeholder="Enter your password"
+          placeholder="Senha"
+          className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302]  px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
         />
       </div>
       {error && (

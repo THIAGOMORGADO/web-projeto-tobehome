@@ -43,7 +43,10 @@ export default function dashboard() {
               title="Notificaçoes"
               decription="Todas notificaçoes"
             >
-              <Button variant="secondary" className="bg-[#7e22ce]">
+              <Button
+                variant="secondary"
+                className="bg-[#7e22ce] hover:bg-black"
+              >
                 {hasVisibleNotifications ? (
                   <BellDot className="text-[#FE8302]" />
                 ) : (
@@ -55,7 +58,10 @@ export default function dashboard() {
               title="Agendamento de reservas"
               decription="Agendamento vindo do site"
             >
-              <Button variant="secondary" className="bg-[#7e22ce]">
+              <Button
+                variant="secondary"
+                className="bg-[#7e22ce] hover:bg-black"
+              >
                 {!hasVisibleNotifications ? (
                   <Calendar className="text-[#FE8302]" />
                 ) : (

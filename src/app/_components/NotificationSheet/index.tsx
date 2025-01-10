@@ -32,8 +32,8 @@ export function NotificationSheet({
           {children}
         </div>
       </SheetTrigger>
-      <SheetContent>
-        <SheetHeader>
+      <SheetContent className="bg-[#7e22ce]">
+        <SheetHeader className="bg-red-300 my-10">
           <SheetTitle>{title}</SheetTitle>
           <SheetDescription>{decription}</SheetDescription>
         </SheetHeader>

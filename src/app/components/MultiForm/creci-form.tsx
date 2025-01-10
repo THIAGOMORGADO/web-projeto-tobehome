@@ -28,7 +28,7 @@ export default function LocationForm({
 
   return (
     <div className="space-y-4">
-      <div className=" flex flex-row items-center justify-between">
+      <div className=" flex flex-row items-center justify-between gap-2">
         <div className="flex flex-col w-full">
           <Label htmlFor="city" className="text-sm font-medium text-gray-700 ">
             RG
@@ -38,7 +38,7 @@ export default function LocationForm({
             placeholder="Informe o seu RG"
             value={formData.rg}
             onChange={(e) => updateFormData({ rg: e.target.value })}
-            className="mt-1 block w-full rounded-md text-purple-700 hover:text-purple-600 sm:text-sm"
+            className="bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302]  px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
           />
         </div>
 
@@ -51,7 +51,7 @@ export default function LocationForm({
             placeholder="Insira seu CPF"
             value={formData.cpf}
             onChange={(e) => updateFormData({ cpf: e.target.value })}
-            className="mt-1 block w-full rounded-md text-purple-700 hover:text-purple-600 sm:text-sm"
+            className="bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302]  px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
           />
         </div>
       </div>
@@ -69,7 +69,7 @@ export default function LocationForm({
                 .value as LocationFormProps["formData"]["provider"],
             })
           }
-          className="form-select block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+          className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302]  px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
         >
           <option value="">Selecione o tipo de conta</option>
           <option value="corretor">Corretor</option>
@@ -91,7 +91,7 @@ export default function LocationForm({
                 placeholder="Insira seu CRECI"
                 value={formData.creci}
                 onChange={(e) => updateFormData({ creci: e.target.value })}
-                className="mt-1 block w-full rounded-md text-purple-700 hover:text-purple-600 sm:text-sm"
+                className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302]  px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
               />
             </div>
             <div className="space-y-2">
@@ -106,7 +106,7 @@ export default function LocationForm({
                 placeholder="Insira seu CNPJ"
                 value={formData.cnpj}
                 onChange={(e) => updateFormData({ cnpj: e.target.value })}
-                className="mt-1 block w-full rounded-md text-purple-700 hover:text-purple-600 sm:text-sm"
+                className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302]  px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
               />
             </div>
           </div>
@@ -122,7 +122,7 @@ export default function LocationForm({
           placeholder="Informe sua data de nascimento"
           value={formData.birthDate}
           onChange={(e) => updateFormData({ birthDate: e.target.value })}
-          className="mt-1 block w-full rounded-md text-purple-700 hover:text-purple-600 sm:text-sm"
+          className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302]  px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
         />
       </div>
     </div>
