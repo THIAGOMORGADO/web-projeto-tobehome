@@ -34,9 +34,7 @@ export function DashboardPageHeaderTitle({
   children,
 }: DashboardPageGenericProps) {
   return (
-    <span
-      className={cn(["text-[#FE8302] text-2xl font-bold uppercase", className])}
-    >
+    <span className={cn([" text-2xl font-bold uppercase", className])}>
       {children}
     </span>
   );

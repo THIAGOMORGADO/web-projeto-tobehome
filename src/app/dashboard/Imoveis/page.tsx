@@ -71,7 +71,7 @@ export default function page() {
           </div>
         </DashboardPageHeader>
         <DashboardPageMain>
-          <div className="">aaa</div>
+          <div className="">Cadastra um novo imovel</div>
         </DashboardPageMain>
       </DashboardPage>
     </div>

@@ -11,10 +11,7 @@ export type SideBarGenericProps<T = any> = {
 export function SideBar({ className, children }: SideBarGenericProps) {
   return (
     <aside
-      className={cn(
-        "border-r border-[#FE8302]  h-screen flex flex-col space-y-6 bg-purple-700",
-        className
-      )}
+      className={cn("border-r   h-screen flex flex-col space-y-6 ", className)}
     >
       {children}
     </aside>
@@ -23,9 +20,7 @@ export function SideBar({ className, children }: SideBarGenericProps) {
 
 export function SideBarHeader({ className, children }: SideBarGenericProps) {
   return (
-    <header className={cn("p-6 py-2 border-b border-[#FE8302]", className)}>
-      {children}
-    </header>
+    <header className={cn("p-6 py-2 border-b ", className)}>{children}</header>
   );
 }
 
@@ -61,7 +56,7 @@ export function SideBarNavHeaderTitle({
   return (
     <h4
       className={cn(
-        "flex items-center font-medium text-xs uppercase text-muted-foreground text-center text-[#FE8302]",
+        "flex items-center font-medium text-xs uppercase text-muted-foreground text-center ",
         className
       )}
     >
@@ -89,8 +84,8 @@ export function SideBarNavLink({
     <Link
       href={href}
       className={cn(
-        " text-[#FE8302] text-xs px-2 py-2 rounded-md flex items-center",
-        active && "bg-[#fe840238]",
+        "  text-xs px-2 py-2 rounded-md flex items-center",
+        active && " text-md",
         className
       )}
     >
@@ -101,12 +96,7 @@ export function SideBarNavLink({
 
 export function SideBarFooter({ className, children }: SideBarGenericProps) {
   return (
-    <footer
-      className={cn(
-        "p-6 mt-auto border-t border-border border-[#FE8302]",
-        className
-      )}
-    >
+    <footer className={cn("p-6 mt-auto border-t border-border", className)}>
       {children}
     </footer>
   );

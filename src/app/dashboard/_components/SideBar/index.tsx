@@ -11,7 +11,6 @@ import {
   SideBarNavHeaderTitle,
   SideBarFooter,
 } from "@/app/_components/Dashboard/SideBar";
-import { Calendar, HousePlus, LayoutDashboard, User } from "lucide-react";
 
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -32,37 +31,37 @@ export default function Main_SideBar() {
       <SideBar className="">
         <SideBarHeader className="flex items-center gap-2">
           <Image src={Logo} alt="logo" className="w-8 h-8 rounded-sm" />
-          <h1 className="text-[#FE8302] font-bold text-">To Be Home </h1>
+          <h1 className="font-bold text-md">To Be Home </h1>
         </SideBarHeader>
         <SideBarMain className="flex flex-col flex-grow">
           <SideBarNav>
             <SideBarNavMain>
-              <SideBarNavLink href="/dashboard" active={isActive("/dashboard")}>
-                <LayoutDashboard className="w-5 mr-5" />
-                Dashboard
+              <SideBarNavLink
+                href="/dashboard"
+                active={isActive("/dashboard")}
+                className="text-md"
+              >
+                Hoje
               </SideBarNavLink>
 
               <SideBarNavLink
                 href="/dashboard/Imoveis"
                 active={isActive("/dashboard/Imoveis")}
               >
-                <HousePlus className="w-5 mr-5" />
-                Imoveis
+                Calendario
               </SideBarNavLink>
 
               <SideBarNavLink
                 href="/dashboard/Clientes"
                 active={isActive("/dashboard/Clientes")}
               >
-                <User className="w-5 mr-5" />
-                Clientes
+                Anuncios
               </SideBarNavLink>
               <SideBarNavLink
                 href="/dashboard/Agendamentos"
                 active={isActive("/dashboard/Agendamentos")}
               >
-                <Calendar className="w-5 mr-5" />
-                Agendamentos
+                Mensagens
               </SideBarNavLink>
             </SideBarNavMain>
           </SideBarNav>
