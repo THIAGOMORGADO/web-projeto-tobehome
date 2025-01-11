@@ -1,19 +1,17 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
-import React, { useEffect, useState } from "react";
 import {
   DashboardPage,
   DashboardPageHeader,
   DashboardPageHeaderTitle,
   DashboardPageMain,
-} from "../_components/Dashboard/page";
+} from "@/app/_components/Dashboard/page";
+import { NotificationSheet } from "@/app/_components/NotificationSheet";
 import { Button } from "@/components/ui/button";
-import { Bell, BellDot, Calendar, Calendar1 } from "lucide-react";
-import { NotificationSheet } from "../_components/NotificationSheet";
-import { PizzaChats } from "./_components/pizzaCharts";
+import { BellDot, Bell, Calendar, Calendar1 } from "lucide-react";
+import React, { useEffect, useState } from "react";
 
-export default function dashboard() {
+export default function page() {
   const [notifications, setNotifications] = useState([
     {
       id: 1,
@@ -38,7 +36,7 @@ export default function dashboard() {
     <div>
       <DashboardPage>
         <DashboardPageHeader>
-          <DashboardPageHeaderTitle>dashboard</DashboardPageHeaderTitle>
+          <DashboardPageHeaderTitle>Imoveis</DashboardPageHeaderTitle>
           <div className="flex flex-row gap-5">
             <NotificationSheet
               title="Notificaçoes"
@@ -72,12 +70,8 @@ export default function dashboard() {
             </NotificationSheet>
           </div>
         </DashboardPageHeader>
-        <DashboardPageMain className="flex flex-row w-full">
-          <div className="bg-red-300 w-[80%]">aa</div>
-          <div className="bg-red-600 w-[20%] p-2">
-            <h1 className="text-2xl">Grafico</h1>
-            <PizzaChats />
-          </div>
+        <DashboardPageMain>
+          <div className="">aaa</div>
         </DashboardPageMain>
       </DashboardPage>
     </div>

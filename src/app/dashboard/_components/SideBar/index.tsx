@@ -11,7 +11,7 @@ import {
   SideBarNavHeaderTitle,
   SideBarFooter,
 } from "@/app/_components/Dashboard/SideBar";
-import { HomeIcon, Settings, HousePlus } from "lucide-react";
+import { Calendar, HousePlus, LayoutDashboard, User } from "lucide-react";
 
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -38,22 +38,31 @@ export default function Main_SideBar() {
           <SideBarNav>
             <SideBarNavMain>
               <SideBarNavLink href="/dashboard" active={isActive("/dashboard")}>
-                <HomeIcon className="w-5 mr-5" />
-                Inicio
+                <LayoutDashboard className="w-5 mr-5" />
+                Dashboard
               </SideBarNavLink>
+
               <SideBarNavLink
-                href="/dashboard/settings"
-                active={isActive("/dashboard/settings")}
-              >
-                <Settings className="w-5 mr-5" />
-                Configuraçoes
-              </SideBarNavLink>
-              <SideBarNavLink
-                href="/dashboard/addnewimovel"
-                active={isActive("/dashboard/addnewimovel")}
+                href="/dashboard/Imoveis"
+                active={isActive("/dashboard/Imoveis")}
               >
                 <HousePlus className="w-5 mr-5" />
-                Cadastra um novo imovel
+                Imoveis
+              </SideBarNavLink>
+
+              <SideBarNavLink
+                href="/dashboard/Clientes"
+                active={isActive("/dashboard/Clientes")}
+              >
+                <User className="w-5 mr-5" />
+                Clientes
+              </SideBarNavLink>
+              <SideBarNavLink
+                href="/dashboard/Agendamentos"
+                active={isActive("/dashboard/Agendamentos")}
+              >
+                <Calendar className="w-5 mr-5" />
+                Agendamentos
               </SideBarNavLink>
             </SideBarNavMain>
           </SideBarNav>
