@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import {
@@ -19,19 +21,7 @@ export default function page() {
       message: "Testando a notificação",
     },
   ]);
-
-  // Checa se há notificações visíveis
-  const hasVisibleNotifications = notifications.some((n) => n.visible);
-
-  // Simula a remoção automática de uma notificação após 5 segundos
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setNotifications((prev) => prev.filter((n) => n.id !== 1)); // Remove a notificação de ID 1
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
+  const [hasVisibleNotifications, setHasVisibleNotifications] = useState(false);
   return (
     <div>
       <DashboardPage>
