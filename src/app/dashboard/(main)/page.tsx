@@ -12,7 +12,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Bell, BellDot, Calendar, Calendar1 } from "lucide-react";
 import { NotificationSheet } from "../../_components/NotificationSheet";
-import ListItem from "./_components/LIstItem";
+import { AvatarProfile } from "./_components/avatar";
+import ProductCarousel from "./_components/LIstItem";
 
 interface Notification {
   id: number;
@@ -52,9 +53,9 @@ export default function dashboard() {
                 className="bg-[#7e22ce] hover:bg-black"
               >
                 {hasVisibleNotifications ? (
-                  <BellDot className="text-[#FE8302]" />
+                  <BellDot className="text-[#Fff]" />
                 ) : (
-                  <Bell className="text-[#FE8302]" />
+                  <Bell className="text-[#fff] text-md" />
                 )}
               </Button>
             </NotificationSheet>
@@ -67,17 +68,20 @@ export default function dashboard() {
                 className="bg-[#7e22ce] hover:bg-black"
               >
                 {!hasVisibleNotifications ? (
-                  <Calendar className="text-[#FE8302]" />
+                  <Calendar className="text-[#fff]" />
                 ) : (
-                  <Calendar1 className="text-[#FE8302]" />
+                  <Calendar1 className="text-[#fff]" />
                 )}
               </Button>
             </NotificationSheet>
           </div>
         </DashboardPageHeader>
         <DashboardPageMain className="flex flex-row justify-center w-full gap-10 ">
-          <div className="text-sm sm:text-3xl font-bold font-sans uppercase flex items-center justify-between  w-[80%] p-2">
-            Ola, thiago
+          <div className="text-sm sm:text-3xl font-bold font-sans uppercase flex items-center justify-between w-[100%] p-2">
+            <div className="flex items-center gap-5">
+              <AvatarProfile />
+              Ola, thiago
+            </div>
             {announcement ? (
               <Button variant="outline">Finalizar anuncio</Button>
             ) : (
@@ -85,21 +89,10 @@ export default function dashboard() {
             )}
           </div>
         </DashboardPageMain>
-        <DashboardPageMain className="flex flex- justify-around  w-full gap-10">
-          <div className="text-sm sm:text-1xl font-bold font-sans uppercase   w-[40%] p-2">
-            <div className="flex items-center justify-between border-b border-zinc-300 ">
-              <h1>Lista de anuncios</h1>
-              <p>(0)</p>
-            </div>
-          </div>
-          <div className="">
-            <h1>Listagem de atualizaçoes</h1>
-
-            <ul>
-              {notifications.map((notifi) => {
-                return <ListItem key={notifi.id} title={notifi.message} />;
-              })}
-            </ul>
+        <DashboardPageMain className="flex flex-row justify-between px-20  w-full ">
+          <div className="flex flex-col">
+            <h1>Imovei livres</h1>
+            <ProductCarousel />
           </div>
         </DashboardPageMain>
       </DashboardPage>

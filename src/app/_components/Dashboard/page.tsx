@@ -10,7 +10,7 @@ export function DashboardPage({
   className,
   children,
 }: DashboardPageGenericProps) {
-  return <section className={cn(["h-screen", className])}>{children}</section>;
+  return <section className={cn(["h-screen ", className])}>{children}</section>;
 }
 
 export function DashboardPageHeader({
@@ -20,7 +20,7 @@ export function DashboardPageHeader({
   return (
     <header
       className={cn([
-        "px-6 h-12 border-b border-border  flex items-center justify-between",
+        "px-6 py-1.5 h-12 border-b border-border border-[#FE8302] flex items-center justify-between bg-[#7e22ce]",
         className,
       ])}
     >

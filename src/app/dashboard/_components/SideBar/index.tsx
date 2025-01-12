@@ -31,7 +31,9 @@ export default function Main_SideBar() {
       <SideBar className="">
         <SideBarHeader className="flex items-center gap-2">
           <Image src={Logo} alt="logo" className="w-8 h-8 rounded-sm" />
-          <h1 className="font-bold text-md">To Be Home </h1>
+          <h1 className="font-bold text-xl text=[#7e22ce]">
+            Apple<span className="text-[#FE8302] font-bold">T</span>rip
+          </h1>
         </SideBarHeader>
         <SideBarMain className="flex flex-col flex-grow">
           <SideBarNav>
