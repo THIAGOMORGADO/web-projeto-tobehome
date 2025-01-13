@@ -31,7 +31,6 @@ export default function Main_SideBar({
 }: MainSidebarProps) {
   const pathname = usePathname();
   const isCorretor = "corretor";
-  const isProprietario = "proprietario";
 
   const isActive = (path: string) => pathname === path;
 
