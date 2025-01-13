@@ -8,10 +8,9 @@ import {
   DashboardPageHeaderTitle,
   DashboardPageMain,
 } from "@/app/_components/Dashboard/page";
+import ProductForm from "@/app/_components/FormProducts";
 import { NotificationSheet } from "@/app/_components/NotificationSheet";
 import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
-import { Label } from "@/components/ui/label";
 import { BellDot, Bell, Calendar, Calendar1 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
@@ -27,8 +26,10 @@ export default function page() {
   return (
     <div>
       <DashboardPage>
-        <DashboardPageHeader>
-          <DashboardPageHeaderTitle>Imoveis</DashboardPageHeaderTitle>
+        <DashboardPageHeader className="">
+          <DashboardPageHeaderTitle className="ml-5">
+            Imoveis
+          </DashboardPageHeaderTitle>
           <div className="flex flex-row gap-5">
             <NotificationSheet
               title="Notificaçoes"
@@ -63,20 +64,7 @@ export default function page() {
           </div>
         </DashboardPageHeader>
         <DashboardPageMain>
-          <div className="">Cadastra um novo imovel</div>
-
-          <div className="flex  flex-col">
-            <form>
-              <div className="">
-                <label>Inserir as imagens</label>
-                <button type="submit" className="">
-                  Enviar imagens
-                </button>
-              </div>
-
-              <div className="">preview</div>
-            </form>
-          </div>
+          <ProductForm />
         </DashboardPageMain>
       </DashboardPage>
     </div>
