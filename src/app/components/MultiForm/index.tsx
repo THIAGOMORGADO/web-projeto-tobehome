@@ -36,6 +36,7 @@ export default function MultiStepForm() {
     cpf: "",
     cnpj: "",
     birthDate: "",
+    confirmPassword: "",
   });
 
   const updateFormData = (data: Partial<typeof formData>) => {
@@ -76,6 +77,7 @@ export default function MultiStepForm() {
             formData={{
               ...formData,
               password: formData.password,
+              confirmPassword: formData.confirmPassword,
             }}
             updateFormData={updateFormData}
           />
