@@ -11,9 +11,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 
-import AccessForm from "./access-form";
 import LocationForm from "./location-form";
 import CreciForm from "./creci-form";
+import AccessForm from "./access-form";
 // import { axios } from "@/app/services/api";
 
 const TOTAL_STEPS = 3;
@@ -30,13 +30,10 @@ export default function MultiStepForm() {
     state: "",
     zipCode: "",
     uf: "",
-    provider: "",
-    creci: "",
+    confirmPassword: "",
     rg: "",
     cpf: "",
-    cnpj: "",
     birthDate: "",
-    confirmPassword: "",
   });
 
   const updateFormData = (data: Partial<typeof formData>) => {
@@ -96,13 +93,9 @@ export default function MultiStepForm() {
           <CreciForm
             formData={{
               ...formData,
-              provider: formData.provider as
-                | "corretor"
-                | "Proprietario"
-                | "Usuario",
-              creci: formData.creci,
+
               rg: formData.rg,
-              cnpj: formData.cnpj,
+
               cpf: formData.cpf,
               birthDate: formData.birthDate,
             }}

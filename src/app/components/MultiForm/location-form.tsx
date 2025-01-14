@@ -17,10 +17,7 @@ interface LocationFormProps {
   updateFormData: (data: Partial<LocationFormProps["formData"]>) => void;
 }
 
-export default function LocationForm({
-  formData,
-  updateFormData,
-}: LocationFormProps) {
+export default function Step2({ formData, updateFormData }: LocationFormProps) {
   return (
     <div className="space-y-4">
       <div className="space-y-2">

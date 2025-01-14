@@ -2,68 +2,75 @@
 "use client";
 
 import { useState } from "react";
-import { useFormStatus } from "react-dom";
-import { signIn } from "@/app/auth/auth";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/custom-input";
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-
-import { useRouter } from "next/navigation";
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-
-  return (
-    <Button
-      type="submit"
-      className="w-full bg-purple-700 hover:bg-purple-800 text-[#FE8302]"
-      disabled={pending}
-    >
-      {pending ? "Signing in..." : "Sign In"}
-    </Button>
-  );
-}
+import { users } from "../mock/users"; // Certifique-se de que 'users' está sendo exportado corretamente
 
 export function SignInForm() {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  async function handleSubmit(formData: FormData) {
-    router.push("/dashboard");
-    setError(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null); // Resetando o erro
+
     try {
-      // await signIn(formData);
+      // Verificar as credenciais com os usuários mockados
+      const user = users.find(
+        (user) => user.email === email && user.password === password
+      );
+
+      if (user) {
+        // Lógica de redirecionamento com base no papel do usuário
+        if (user.role === "corretor" || user.role === "proprietario") {
+          router.push("/dashboard"); // Para corretores ou proprietários
+        } else if (user.role === "super_admin") {
+          router.push("/admin-dashboard"); // Para super admin
+        } else {
+          throw new Error("Invalid role");
+        }
+      } else {
+        throw new Error("Invalid credentials");
+      }
     } catch (err) {
+      // Tratar erros e exibir mensagem de erro
       setError(
         "Failed to sign in. Please check your credentials and try again."
       );
     }
-  }
+  };
 
   return (
-    <form action={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
         <Input
           id="email"
-          name="email"
           type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)} // Controlando o estado do email
           autoComplete="email"
           required
           placeholder="Email"
-          className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302]  px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
+          className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
         />
       </div>
       <div className="space-y-2">
         <Label htmlFor="password">Senha</Label>
         <Input
           id="password"
-          name="password"
           type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)} // Controlando o estado da senha
           autoComplete="current-password"
           required
           placeholder="Senha"
-          className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302]  px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
+          className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
         />
       </div>
       {error && (
@@ -72,7 +79,12 @@ export function SignInForm() {
           <AlertDescription>{error}</AlertDescription>
         </Alert>
       )}
-      <SubmitButton />
+      <Button
+        type="submit"
+        className="w-full bg-purple-700 hover:bg-purple-800 text-[#FE8302]"
+      >
+        Sign In
+      </Button>
     </form>
   );
 }
