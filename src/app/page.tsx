@@ -17,12 +17,12 @@ export default function Home() {
         <FeaturesSection />
         <Catalog />
         <GallerySection />
-        <div className="flex ">
-          <div className="p-10 text-center w-[50%]">
+        <div className="flex flex-col w-full sm:flex sm:flex-row">
+          <div className="p-10 text-center w-[100%] sm:w-[50%] sm:flex-row">
             <h1 className="text-2xl">Informe seu dados</h1>
             <VisitorForm />
           </div>
-          <div className="w-[50%]">
+          <div className="w-[100%] sm:w-[50%]">
             <BookingForm />
           </div>
         </div>
