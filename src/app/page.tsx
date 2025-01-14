@@ -17,13 +17,14 @@ export default function Home() {
         <FeaturesSection />
         <Catalog />
         <GallerySection />
-
-        <div className="p-10 text-center">
-          <h1 className="text-2xl">Informe seu dados</h1>
-          <VisitorForm />
-        </div>
-        <div className="">
-          <BookingForm />
+        <div className="flex ">
+          <div className="p-10 text-center w-[50%]">
+            <h1 className="text-2xl">Informe seu dados</h1>
+            <VisitorForm />
+          </div>
+          <div className="w-[50%]">
+            <BookingForm />
+          </div>
         </div>
         <Footer />
       </main>
