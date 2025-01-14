@@ -1,3 +1,4 @@
+import { useAuth } from "@/app/context/AuthContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,10 +11,20 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { LogOut, Settings, User } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import React from "react";
 
 export default function UserDropdowm() {
+  const { logout } = useAuth();
+  const routes = useRouter();
+
+  const handleLogout = () => {
+    logout();
+
+    return routes.push("/signin");
+  };
+
   return (
     <div>
       <DropdownMenu>
@@ -58,7 +69,7 @@ export default function UserDropdowm() {
           <DropdownMenuSeparator />
           <DropdownMenuItem className="flex justify-between border-border  font-bold">
             Desconectar
-            <LogOut className="" />
+            <LogOut className="" onClick={handleLogout} />
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

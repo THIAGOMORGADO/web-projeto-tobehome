@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   DashboardPage,
   DashboardPageHeader,
@@ -14,6 +14,7 @@ import { Bell, BellDot, Calendar, Calendar1 } from "lucide-react";
 import { NotificationSheet } from "../../_components/NotificationSheet";
 import { AvatarProfile } from "./_components/avatar";
 import ProductCarousel from "./_components/LIstItem";
+import { useAuth } from "@/app/context/AuthContext";
 
 interface Notification {
   id: number;
@@ -36,6 +37,7 @@ export default function dashboard() {
   ]);
   const [announcement, setAnnouncement] = useState(false);
   const [hasVisibleNotifications, sethasVisibleNotifications] = useState(false);
+  const { user } = useAuth();
   return (
     <div>
       <DashboardPage className="">
@@ -80,7 +82,10 @@ export default function dashboard() {
           <div className="text-sm sm:text-3xl font-bold font-sans uppercase flex items-center justify-between w-[100%] p-2">
             <div className="flex items-center gap-5">
               <AvatarProfile />
-              Ola, thiago
+              <div className="">
+                <h1 className="text-sm">Ola, {user?.name}</h1>
+                <p className="text-[16px]">Tipo: {user?.role}</p>
+              </div>
             </div>
             {announcement ? (
               <Button variant="outline">Finalizar anuncio</Button>

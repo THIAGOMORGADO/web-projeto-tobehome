@@ -7,13 +7,15 @@ import { Button } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/custom-input";
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { users } from "../mock/users"; // Certifique-se de que 'users' está sendo exportado corretamente
+import { users } from "../mock/users";
+import { useAuth } from "@/app/context/AuthContext"; // Importando o hook de autenticação
 
 export function SignInForm() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const { login } = useAuth(); // Usando o contexto de autenticação
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,8 +28,16 @@ export function SignInForm() {
       );
 
       if (user) {
+        // Chama o login do contexto
+        login(user.name, user.email, user.role);
+        console.log(user);
+
         // Lógica de redirecionamento com base no papel do usuário
-        if (user.role === "corretor" || user.role === "proprietario") {
+        if (
+          user.role === "corretor" ||
+          user.role === "proprietario" ||
+          user.role === "user"
+        ) {
           router.push("/dashboard"); // Para corretores ou proprietários
         } else if (user.role === "super_admin") {
           router.push("/admin-dashboard"); // Para super admin
