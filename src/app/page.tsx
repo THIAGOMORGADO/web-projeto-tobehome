@@ -22,6 +22,9 @@ export default function Home() {
           <h1 className="text-2xl">Informe seu dados</h1>
           <VisitorForm />
         </div>
+        <div className="">
+          <BookingForm />
+        </div>
         <Footer />
       </main>
     </>
