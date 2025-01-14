@@ -1,6 +1,9 @@
+"use client";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export default function HeroSection() {
+  const routes = useRouter();
   return (
     <section className="relative h-screen flex items-center justify-center text-center text-white py-0 px-3 bg-gradient-to-b from-black/50 to-black/20">
       <div className="relative z-10 max-w-4xl mx-auto p-6 bg-black/50 rounded-lg text-center">
@@ -19,6 +22,7 @@ export default function HeroSection() {
         <Button
           size="lg"
           className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg transform transition-transform hover:scale-105"
+          onClick={() => routes.push("/LandingPage/contacts")}
         >
           Entra em contato
         </Button>

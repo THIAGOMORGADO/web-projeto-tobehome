@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import GallerySection from "./components/Gallery";
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
+import VisitorForm from "./LandingPage/components/VisitorForm";
 
 export default function Home() {
   return (
@@ -16,8 +17,11 @@ export default function Home() {
         <FeaturesSection />
         <Catalog />
         <GallerySection />
-        <BookingForm />
 
+        <div className="p-10 text-center">
+          <h1 className="text-2xl">Informe seu dados</h1>
+          <VisitorForm />
+        </div>
         <Footer />
       </main>
     </>
