@@ -16,7 +16,7 @@ export default function DropMenuUser() {
 
   const handleLogin = () => {
     // Implement your login logic here
-    routes.push("/dashboard");
+    routes.push("/signin");
   };
   return (
     <DropdownMenu>

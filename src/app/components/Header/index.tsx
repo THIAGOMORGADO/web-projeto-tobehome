@@ -21,7 +21,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-[#7e22ce] text-white shadow-lg">
+    <header className="bg-[#fff] text-black shadow-lg">
       <nav className="container mx-auto sm:px-28 px-8 py-2">
         <div className="flex justify-between  items-center px-5 ">
           {/* Logo e Nome */}
@@ -33,32 +33,34 @@ export default function Header() {
                 className="sm:h-15 sm:w-15 w-10 h-10"
               />
             </Link>
-            <h4 className="text-lg font-semibold text-white">To Be Home</h4>
+            <h4 className="text-lg font-semibold text-black text-xl text-[#000]">
+              Apple <span className="text-[#FE8302] ">T</span>rip
+            </h4>
           </div>
 
           {/* Menu Central */}
           <div className="hidden md:flex items-center space-x-8">
             <Link
               href="#"
-              className="text-white hover:text-indigo-300 transition-colors duration-200"
+              className="text-black hover:text-indigo-300 transition-colors duration-200"
             >
               Início
             </Link>
             <Link
               href="#"
-              className="text-white hover:text-indigo-300 transition-colors duration-200"
+              className="text-black hover:text-indigo-300 transition-colors duration-200"
             >
               Imóveis
             </Link>
             <Link
               href="#"
-              className="text-white hover:text-indigo-300 transition-colors duration-200"
+              className="text-black hover:text-indigo-300 transition-colors duration-200"
             >
               Serviços
             </Link>
             <Link
               href="#"
-              className="text-white hover:text-indigo-300 transition-colors duration-200"
+              className="text-black hover:text-indigo-300 transition-colors duration-200"
             >
               Contato
             </Link>
@@ -70,9 +72,9 @@ export default function Header() {
             {/* Botão para Mobile */}
             <button className="md:hidden" onClick={toggleMenu}>
               {isMenuOpen ? (
-                <X size={28} color="#fff" />
+                <X size={28} color="#000" />
               ) : (
-                <Menu size={28} color="#fff" />
+                <Menu size={28} color="#000" />
               )}
             </button>
           </div>
@@ -83,39 +85,39 @@ export default function Header() {
             <div className="flex flex-col space-y-3">
               <Link
                 href="#"
-                className="text-white hover:text-indigo-300 py-3 transition-colors duration-200"
+                className="text-black hover:text-indigo-300 py-3 transition-colors duration-200"
               >
                 Início
               </Link>
               <Link
                 href="#"
-                className="text-white hover:text-indigo-300 py-3 transition-colors duration-200"
+                className="text-black hover:text-indigo-300 py-3 transition-colors duration-200"
               >
                 Imóveis
               </Link>
               <Link
                 href="#"
-                className="text-white hover:text-indigo-300 py-3 transition-colors duration-200"
+                className="text-black hover:text-indigo-300 py-3 transition-colors duration-200"
               >
                 Serviços
               </Link>
               <Link
                 href="#"
-                className="text-white hover:text-indigo-300 py-3 transition-colors duration-200"
+                className="text-black hover:text-indigo-300 py-3 transition-colors duration-200"
               >
                 Contato
               </Link>
               <div className="flex flex-col space-y-3 mt-3">
                 <Button
                   variant="outline"
-                  className="border-0 text-white bg-black py-2 px-4 rounded-lg hover:bg-white hover:text-black transition-colors duration-300"
+                  className="border-0 text-[#fff] bg-black py-2 px-4 rounded-lg hover:bg-white hover:text-black transition-colors duration-300"
                   onClick={handleSignIn}
                 >
                   Login
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-0 text-white bg-black py-2 px-4 rounded-lg hover:text-black transition-colors"
+                  className="border-0 text-[#fff] bg-black py-2 px-4 rounded-lg hover:text-black transition-colors"
                 >
                   Reserve Sua Estadia
                 </Button>
