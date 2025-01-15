@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+ 
 import { users } from "@/app/mock/users";
 import { NextRequest, NextResponse } from "next/server";
 
