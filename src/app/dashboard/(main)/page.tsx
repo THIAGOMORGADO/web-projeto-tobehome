@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
-import React, { PropsWithChildren, useState } from "react";
+import React, { PropsWithChildren, ReactNode, useState } from "react";
 
 import { useAuth } from "@/app/context/AuthContext";
 import {
@@ -14,13 +14,17 @@ import { VisitorsList } from "@/app/_components/NotificationSheet";
 import { BellDot, Bell, Calendar, Calendar1 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+type Props = {
+  children: ReactNode;
+};
+
 interface Notification {
   id: number;
   visible: boolean;
   message: string;
 }
 
-export default function dashboard({ children }: PropsWithChildren) {
+export default function dashboard({ children }: Props) {
   const [notifications, setNotifications] = useState<Notification[]>([
     {
       id: 1,
