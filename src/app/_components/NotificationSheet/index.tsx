@@ -1,4 +1,3 @@
- 
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -10,15 +9,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ReactNode, useState, useEffect } from "react";
-import { db } from "@/app/firebaseServices/Firebase"; // Certifique-se de importar do arquivo correto
-import { ref, onValue } from "firebase/database";
+import { ReactNode, useEffect, useState } from "react";
 
 // Tipos para as notificações
 type Notification = {
   id: string;
   message: string;
-  visible: boolean;
   name: string;
   phone: string;
   email: string;
@@ -35,40 +31,19 @@ export function VisitorsList({
   title,
   description,
 }: NotificationSheetProps) {
-  const [notifications, setNotifications] = useState<Notification[]>([]); // Estado para armazenar as notificações
+  const [notifications, setNotifications] = useState<Notification[]>([
+    {
+      id: "1",
+      name: "João Silva",
+      email: "joao.silva@example.com",
+      phone: "+55 11 91234-5678",
+      message: "Gostaria de saber mais sobre seus serviços.",
+    },
+  ]);
 
-  // Função para buscar as notificações do Firebase
-  const fetchNotifications = () => {
-    const notificationsRef = ref(db, "visitors"); // Caminho para as notificações no Firebase
-
-    // Recuperar as notificações do Firebase
-    onValue(notificationsRef, (snapshot) => {
-      const data = snapshot.val(); // Pegar os dados da snapshot
-      if (data) {
-        // Se houver dados, cria um array com as notificações
-        const notificationsArray: Notification[] = Object.keys(data).map(
-          (key) => ({
-            id: key,
-            ...data[key], // Expande cada notificação com os dados
-          })
-        );
-        setNotifications(notificationsArray); // Atualiza o estado com as notificações
-      } else {
-        setNotifications([]); // Caso não haja notificações
-      }
-    });
-  };
-
-  // Hook para pegar as notificações quando o componente for montado
   useEffect(() => {
-    fetchNotifications(); // Chama a função para buscar as notificações
-
-    // Limpa a inscrição quando o componente é desmontado para evitar vazamento de memória
-    return () => {
-      // O Firebase automaticamente limpa a inscrição, mas você pode fazer isso manualmente, se necessário.
-    };
-  }, []); // Array vazio faz com que a execução ocorra apenas uma vez ao montar o componente
-
+    setNotifications((prevNotifications) => [...prevNotifications]);
+  }, []);
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -84,16 +59,10 @@ export function VisitorsList({
         <div>
           {notifications.length > 0 ? (
             notifications.map((notification) => (
-              <div
-                key={notification.id}
-                className={`p-4 ${
-                  notification.visible ? "bg-green-300" : "bg-gray-300"
-                }`}
-              >
+              <div key={notification.id} className={`p-4 `}>
                 <p>{notification.name}</p>
                 <p>{notification.phone}</p>
                 <p>{notification.email}</p>
-                <p>{notification.visible}</p>
               </div>
             ))
           ) : (
