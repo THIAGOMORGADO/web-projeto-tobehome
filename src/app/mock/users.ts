@@ -25,9 +25,9 @@ export const users: User[] = [
     role: "proprietario",
   },
   {
-    email: "user4@example.com",
-    name: "User Three",
-    password: "password4",
+    email: "thiago@appletrip.com.br",
+    name: "thiago morgado",
+    password: "123456",
     role: "super_admin",
   },
 ];

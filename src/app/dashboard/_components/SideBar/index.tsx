@@ -19,6 +19,7 @@ import Image from "next/image";
 import { FiMenu, FiX } from "react-icons/fi";
 
 import Logo from "@/app/assets/logo.jpg";
+import { useAuth } from "@/app/context/AuthContext";
 
 type MainSidebarProps = {
   isOpen: boolean;
@@ -30,7 +31,7 @@ export default function Main_SideBar({
   toggleSidebar,
 }: MainSidebarProps) {
   const pathname = usePathname();
-  const isCorretor = "corretor";
+  const { user } = useAuth();
 
   const isActive = (path: string) => pathname === path;
 
@@ -53,35 +54,45 @@ export default function Main_SideBar({
           <SideBarMain className="flex flex-col flex-grow">
             <SideBarNav>
               <SideBarNavMain>
-                <SideBarNavLink
-                  href="/dashboard"
-                  active={isActive("/dashboard")}
-                  className="text-md"
-                >
-                  Hoje
-                </SideBarNavLink>
+                {user?.role === "super_admin" && (
+                  <div className="flex flex-col gap-5">
+                    <SideBarNavLink
+                      href="/dashboard"
+                      active={isActive("/dashboard/")}
+                      className="text-md "
+                    >
+                      Painel
+                    </SideBarNavLink>
 
-                {isCorretor && (
-                  <SideBarNavLink
-                    href="/dashboard/addImoveis"
-                    active={isActive("/dashboard/addImoveis")}
-                  >
-                    cadastra imovel
-                  </SideBarNavLink>
+                    <SideBarNavLink
+                      href="/dashboard/admin/corretor"
+                      active={isActive("/dashboard/admin/corretor")}
+                    >
+                      Cadsatra corretor
+                    </SideBarNavLink>
+
+                    <SideBarNavLink
+                      href="/dashboard/Clientes"
+                      active={isActive("/dashboard/admin/")}
+                    >
+                      Cadastra proprietario
+                    </SideBarNavLink>
+                    <SideBarNavLink
+                      href="/dashboard/Clientes"
+                      active={isActive("/dashboard/admin/")}
+                    >
+                      Gerenciar
+                    </SideBarNavLink>
+                    <SideBarNavLink
+                      href="/dashboard/Clientes"
+                      active={isActive("/dashboard/admin/")}
+                    >
+                      Notificação
+                    </SideBarNavLink>
+                  </div>
                 )}
-
-                <SideBarNavLink
-                  href="/dashboard/Clientes"
-                  active={isActive("/dashboard/Clientes")}
-                >
-                  Anuncios
-                </SideBarNavLink>
-                <SideBarNavLink
-                  href="/dashboard/Agendamentos"
-                  active={isActive("/dashboard/Agendamentos")}
-                >
-                  Mensagens
-                </SideBarNavLink>
+                {user?.role === "proprietario" && <p>Link do proprietari</p>}
+                {user?.role === "corretor" && <p>Link do corretor</p>}
               </SideBarNavMain>
             </SideBarNav>
 

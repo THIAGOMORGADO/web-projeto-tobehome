@@ -13,9 +13,10 @@ export default function HeroSection() {
           </span>
         </h1>
         <div className="w-full text-center  flex items-center justify-center">
-          <p className="text-xl md:text-2xl mb-8 drop-shadow-md w-[90%] sm:w-[70%] text-center my-10 my-10">
-            Proprietario entre em contato com nossa equipe. desfrute dos
-            melhores corretores
+          <p className="text-xl md:text-1xl mb-8 drop-shadow-md w-[90%] sm:w-[70%] text-center my-10 my-10">
+            Proprietários e corretores, entre em contato com nossa equipe e
+            aproveite o suporte dos melhores profissionais do mercado. Estamos
+            prontos para ajudar você a alcançar os melhores resultados!
           </p>
         </div>
 

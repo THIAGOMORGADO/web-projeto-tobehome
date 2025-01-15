@@ -1,44 +1,46 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
+import React, { PropsWithChildren, useState } from "react";
+
+import { useAuth } from "@/app/context/AuthContext";
 import {
   DashboardPage,
   DashboardPageHeader,
   DashboardPageHeaderTitle,
 } from "@/app/_components/Dashboard/page";
 import { VisitorsList } from "@/app/_components/NotificationSheet";
-import { Button } from "@/components/ui/button";
 import { BellDot, Bell, Calendar, Calendar1 } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 
-type TitlePageProps = {
-  titlePage: string;
-};
+interface Notification {
+  id: number;
+  visible: boolean;
+  message: string;
+}
 
-export default function Header({ titlePage }: TitlePageProps) {
-  const [notifications, setNotifications] = useState([
+export default function dashboard({ children }: PropsWithChildren) {
+  const [notifications, setNotifications] = useState<Notification[]>([
     {
       id: 1,
       visible: true,
       message: "Testando a notificação",
     },
+    {
+      id: 2,
+      visible: true,
+      message: "Testando a notificação",
+    },
   ]);
-
-  // Checa se há notificações visíveis
-  const hasVisibleNotifications = notifications.some((n) => n.visible);
-
-  // Simula a remoção automática de uma notificação após 5 segundos
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setNotifications((prev) => prev.filter((n) => n.id !== 1)); // Remove a notificação de ID 1
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, []);
+  const [announcement, setAnnouncement] = useState(false);
+  const [hasVisibleNotifications, sethasVisibleNotifications] = useState(false);
+  const { user } = useAuth();
   return (
     <div>
       <DashboardPage>
         <DashboardPageHeader>
-          <DashboardPageHeaderTitle>{titlePage}</DashboardPageHeaderTitle>
+          <DashboardPageHeaderTitle>Corretor</DashboardPageHeaderTitle>
           <div className="flex flex-row gap-5">
             <VisitorsList title="Notificaçoes" description="Todas notificaçoes">
               <Button
@@ -69,6 +71,18 @@ export default function Header({ titlePage }: TitlePageProps) {
             </VisitorsList>
           </div>
         </DashboardPageHeader>
+
+        {user?.role === "super_admin" && (
+          <div className="">
+            <div className=" py-5 px-5 flex items-center justify-between border-b border-border">
+              <h1>Adicionar o corretor</h1>
+              <Button>Adicionar novo corretor</Button>
+            </div>
+            <div className="">
+              <form></form>
+            </div>
+          </div>
+        )}
       </DashboardPage>
     </div>
   );

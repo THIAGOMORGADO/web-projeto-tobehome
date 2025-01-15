@@ -40,7 +40,7 @@ export function SignInForm() {
         ) {
           router.push("/dashboard"); // Para corretores ou proprietários
         } else if (user.role === "super_admin") {
-          router.push("/admin-dashboard"); // Para super admin
+          router.push("/dashboard"); // Para super admin
         } else {
           throw new Error("Invalid role");
         }
