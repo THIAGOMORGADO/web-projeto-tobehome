@@ -1,14 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { db, ref, set } from "@/app/firebaseServices/Firebase"; // Importando o arquivo de configuração do Firebase // Importando o arquivo de configuração do Firebase
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { User, Mail, Phone, MessageSquare } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 export default function VisitorForm() {
   const [state, setState] = useState({
@@ -20,7 +19,6 @@ export default function VisitorForm() {
     success: false,
   });
   const [isPending, setIsPending] = useState(false);
-  const router = useRouter();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -34,46 +32,8 @@ export default function VisitorForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setState((prevState) => ({ ...prevState, error: null })); // Resetando erro
     setIsPending(true);
-
-    try {
-      // Verifica se todos os campos necessários estão preenchidos
-      if (!state.name || !state.email || !state.phone || !state.message) {
-        setIsPending(false);
-        return;
-      }
-
-      // Criando referência no Firebase Realtime Database
-      const newUserRef = ref(db, "visitors/" + state.email.replace(/\./g, "_")); // Usando o email como identificador único
-
-      // Enviando os dados para o Firebase
-      await set(newUserRef, {
-        name: state.name,
-        email: state.email,
-        phone: state.phone,
-        message: state.message,
-      });
-
-      console.log("Mensagem gravada no Realtime Database");
-
-      // Limpar os campos e mostrar a mensagem de sucesso
-      setState({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-        error: null,
-        success: true,
-      });
-
-      // Redirecionar ou exibir sucesso
-      router.push("/"); // Pode ser redirecionado para uma página de agradecimento ou similar
-    } catch (err) {
-      console.error("Erro ao gravar no Firebase: ", err);
-    } finally {
-      setIsPending(false); // Resetando o estado de pendência
-    }
+    console.log("Aqui");
   };
 
   return (

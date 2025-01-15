@@ -23,7 +23,7 @@ export default function HeroSection() {
         <Button
           size="lg"
           className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg transform transition-transform hover:scale-105"
-          onClick={() => routes.push("/LandingPage")}
+          onClick={() => routes.push("/LandingPage/contacts")}
         >
           Entra em contato
         </Button>
