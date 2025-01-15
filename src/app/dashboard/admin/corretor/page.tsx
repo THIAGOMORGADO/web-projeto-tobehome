@@ -20,7 +20,7 @@ interface Notification {
   message: string;
 }
 
-export default function dashboard({ children }: PropsWithChildren) {
+export default function dashboard() {
   const [notifications, setNotifications] = useState<Notification[]>([
     {
       id: 1,
