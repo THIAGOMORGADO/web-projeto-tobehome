@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React from "react";
@@ -35,8 +34,6 @@ import { Textarea } from "@/components/ui/textarea";
 import Header from "@/app/components/Header";
 import { toast } from "sonner";
 import {
-  ChevronLeft,
-  ChevronRight,
   User,
   Mail,
   Award,
@@ -46,8 +43,8 @@ import {
   MapPinned,
   HelpCircle,
   MessageSquare,
+  CheckCircle,
 } from "lucide-react";
-import { Progress } from "@/components/ui/progress";
 
 const formSchema = z.object({
   nome: z.string().min(2, { message: "Nome deve ter pelo menos 2 caracteres" }),
@@ -78,7 +75,7 @@ const formSchema = z.object({
     .min(10, { message: "Motivo deve ter pelo menos 10 caracteres" }),
 });
 
-const steps = [
+const fieldGroups = [
   { title: "Informações Pessoais", fields: ["nome", "email", "creci"] },
   { title: "Endereço", fields: ["endereco", "estado", "cidade", "bairro"] },
   { title: "Informações Profissionais", fields: ["local", "locacao"] },
@@ -112,8 +109,8 @@ const placeholders = {
 };
 
 export default function PartnerForm() {
-  const [currentStep, setCurrentStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [completedFields, setCompletedFields] = useState<string[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -129,22 +126,17 @@ export default function PartnerForm() {
       bairro: "",
       motivo: "",
     },
-    mode: "onSubmit",
+    mode: "onChange",
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep((prev) => prev + 1);
-      return;
-    }
-
     try {
       setIsSubmitting(true);
       await new Promise((resolve) => setTimeout(resolve, 2000));
       console.log("Valores enviados:", values);
       toast("Formulário enviado com sucesso! Entraremos em contato em breve.");
       form.reset();
-      setCurrentStep(0);
+      setCompletedFields([]);
     } catch (error) {
       console.error("Erro ao enviar o formulário:", error);
       toast("Erro ao enviar o formulário");
@@ -153,132 +145,142 @@ export default function PartnerForm() {
     }
   };
 
-  const handleNext = async () => {
-    const fields = steps[currentStep].fields;
-    const output = await form.trigger(fields as any);
-    if (output) {
-      setCurrentStep((prev) => Math.min(steps.length - 1, prev + 1));
-    }
+  const handleFieldCompletion = (fieldName: string, isValid: boolean) => {
+    setCompletedFields((prev) =>
+      isValid
+        ? [...new Set([...prev, fieldName])]
+        : prev.filter((f) => f !== fieldName)
+    );
   };
-
-  const currentFields = steps[currentStep].fields;
 
   return (
     <>
       <Header />
 
       <div className="container mx-auto px-4 py-8">
-        <Card className="w-full max-w-2xl mx-auto my-10 shadow-lg">
+        <Card className="w-full max-w-4xl mx-auto my-10 shadow-lg">
           <CardHeader className="bg-purple-100 rounded-t-lg">
             <CardTitle className="text-3xl font-bold text-purple-800">
               Corretor: Seja Nosso Parceiro
             </CardTitle>
             <CardDescription className="text-lg text-purple-600">
-              {steps[currentStep].title}
+              Preencha o formulário abaixo para se tornar nosso parceiro
             </CardDescription>
           </CardHeader>
           <CardContent className="mt-6">
-            <Progress
-              value={((currentStep + 1) / steps.length) * 100}
-              className="mb-6"
-            />
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-6"
+                className="space-y-8"
               >
-                {currentFields.map((field) => (
-                  <FormField
-                    key={field}
-                    control={form.control}
-                    name={field as keyof z.infer<typeof formSchema>}
-                    render={({ field: fieldProps }) => (
-                      <FormItem>
-                        <FormLabel className="text-sm font-medium text-gray-700">
-                          {field.charAt(0).toUpperCase() + field.slice(1)}
-                        </FormLabel>
-                        <FormControl>
-                          <div className="relative">
-                            {field === "locacao" ? (
-                              <Select
-                                onValueChange={fieldProps.onChange}
-                                defaultValue={fieldProps.value}
-                              >
-                                <FormControl>
-                                  <SelectTrigger className="bg-[#ececec] border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
-                                    <SelectValue
-                                      placeholder={placeholders[field]}
-                                    />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                  <SelectItem value="sim">Sim</SelectItem>
-                                  <SelectItem value="nao">Não</SelectItem>
-                                </SelectContent>
-                              </Select>
-                            ) : field === "motivo" ? (
-                              <Textarea
-                                placeholder={placeholders[field]}
-                                className="min-h-[120px] resize-y pl-10 bg-[#ececec] border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
-                                {...fieldProps}
-                              />
-                            ) : (
-                              <Input
-                                className="pl-10 bg-[#ececec] border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
-                                placeholder={
-                                  placeholders[
-                                    field as keyof typeof placeholders
-                                  ]
-                                }
-                                {...fieldProps}
-                              />
-                            )}
-                            {fieldIcons[field as keyof typeof fieldIcons] && (
-                              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                                {React.createElement(
-                                  fieldIcons[field as keyof typeof fieldIcons],
-                                  { size: 18 }
+                {fieldGroups.map((group, index) => (
+                  <div key={index} className="space-y-4">
+                    <h3 className="text-lg font-semibold text-gray-700">
+                      {group.title}
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {group.fields.map((field) => (
+                        <FormField
+                          key={field}
+                          control={form.control}
+                          name={field as keyof z.infer<typeof formSchema>}
+                          render={({ field: fieldProps }) => (
+                            <FormItem>
+                              <FormLabel className="text-sm font-medium text-gray-700 flex items-center">
+                                {field.charAt(0).toUpperCase() + field.slice(1)}
+                                {completedFields.includes(field) && (
+                                  <CheckCircle className="ml-2 h-4 w-4 text-green-500" />
                                 )}
-                              </span>
-                            )}
-                          </div>
-                        </FormControl>
-                        <FormMessage className="text-xs text-red-500" />
-                      </FormItem>
-                    )}
-                  />
+                              </FormLabel>
+                              <FormControl>
+                                <div className="relative">
+                                  {field === "locacao" ? (
+                                    <Select
+                                      onValueChange={(value) => {
+                                        fieldProps.onChange(value);
+                                        handleFieldCompletion(field, !!value);
+                                      }}
+                                      defaultValue={fieldProps.value}
+                                    >
+                                      <FormControl>
+                                        <SelectTrigger className="bg-[#ececec] border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 pl-10">
+                                          <SelectValue
+                                            placeholder={placeholders[field]}
+                                          />
+                                        </SelectTrigger>
+                                      </FormControl>
+                                      <SelectContent>
+                                        <SelectItem value="sim">Sim</SelectItem>
+                                        <SelectItem value="nao">Não</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  ) : field === "motivo" ? (
+                                    <Textarea
+                                      placeholder={placeholders[field]}
+                                      className="text-sm flex items-center justify-center resize-y pl-10 bg-[#ececec] border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
+                                      {...fieldProps}
+                                      onChange={(e) => {
+                                        fieldProps.onChange(e);
+                                        handleFieldCompletion(
+                                          field,
+                                          e.target.value.length >= 10
+                                        );
+                                      }}
+                                    />
+                                  ) : (
+                                    <Input
+                                      className="pl-10  bg-[#ececec] border-gray-900 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
+                                      placeholder={
+                                        placeholders[
+                                          field as keyof typeof placeholders
+                                        ]
+                                      }
+                                      {...fieldProps}
+                                      onChange={(e) => {
+                                        fieldProps.onChange(e);
+                                        handleFieldCompletion(
+                                          field,
+                                          e.target.value.length >= 2
+                                        );
+                                      }}
+                                    />
+                                  )}
+                                  {fieldIcons[
+                                    field as keyof typeof fieldIcons
+                                  ] && (
+                                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                                      {React.createElement(
+                                        fieldIcons[
+                                          field as keyof typeof fieldIcons
+                                        ],
+                                        { size: 18 }
+                                      )}
+                                    </span>
+                                  )}
+                                </div>
+                              </FormControl>
+                              <FormMessage className="text-xs text-red-500" />
+                            </FormItem>
+                          )}
+                        />
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </form>
             </Form>
           </CardContent>
-          <CardFooter className="flex justify-between">
+          <CardFooter className="flex justify-end">
             <Button
-              type="button"
-              variant="outline"
-              onClick={() => setCurrentStep((prev) => Math.max(0, prev - 1))}
-              disabled={currentStep === 0}
-              className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-            >
-              <ChevronLeft className="mr-2 h-4 w-4" /> Anterior
-            </Button>
-            <Button
-              type="button"
-              onClick={
-                currentStep === steps.length - 1
-                  ? form.handleSubmit(onSubmit)
-                  : handleNext
+              type="submit"
+              onClick={form.handleSubmit(onSubmit)}
+              disabled={
+                isSubmitting ||
+                completedFields.length !== Object.keys(fieldIcons).length
               }
-              disabled={isSubmitting}
               className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded shadow"
             >
-              {currentStep === steps.length - 1
-                ? isSubmitting
-                  ? "Enviando..."
-                  : "Enviar"
-                : "Próximo"}
-              {currentStep < steps.length - 1 && (
-                <ChevronRight className="ml-2 h-4 w-4" />
-              )}
+              {isSubmitting ? "Enviando..." : "Enviar"}
             </Button>
           </CardFooter>
         </Card>
