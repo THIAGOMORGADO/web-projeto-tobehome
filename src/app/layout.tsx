@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "./context/AuthContext";
 
 const geistSans = Geist({
@@ -35,8 +35,8 @@ export default function RootLayout({
           )}
           suppressHydrationWarning={true}
         >
-          <Toaster />
           {children}
+          <Toaster />
         </body>
       </AuthProvider>
     </html>

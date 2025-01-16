@@ -59,6 +59,12 @@ export default function Header() {
               Serviços
             </Link>
             <Link
+              href="/LandingPage/newJobs"
+              className="text-black hover:text-indigo-300 transition-colors duration-200"
+            >
+              Trabalhar Conosco
+            </Link>
+            <Link
               href="#"
               className="text-black hover:text-indigo-300 transition-colors duration-200"
             >
@@ -100,6 +106,12 @@ export default function Header() {
                 className="text-black hover:text-indigo-300 py-3 transition-colors duration-200"
               >
                 Serviços
+              </Link>
+              <Link
+                href="/LandingPage/newJobs"
+                className="text-black hover:text-indigo-300 transition-colors duration-200"
+              >
+                Trabalhar Conosco
               </Link>
               <Link
                 href="#"
