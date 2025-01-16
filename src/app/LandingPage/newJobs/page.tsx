@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React from "react";
 
+import React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -47,6 +46,7 @@ import {
   HelpCircle,
   MessageSquare,
 } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
 
 const formSchema = z.object({
   nome: z.string().min(2, { message: "Nome deve ter pelo menos 2 caracteres" }),
@@ -95,6 +95,19 @@ const fieldIcons = {
   local: MapPin,
   locacao: HelpCircle,
   motivo: MessageSquare,
+};
+
+const placeholders = {
+  nome: "Ex: João da Silva",
+  email: "seu.email@exemplo.com",
+  creci: "Ex: 123456-F",
+  endereco: "Ex: Rua das Flores, 123",
+  estado: "Ex: São Paulo",
+  cidade: "Ex: São Paulo",
+  bairro: "Ex: Centro",
+  local: "Ex: São Paulo, SP",
+  locacao: "Selecione uma opção",
+  motivo: "Descreva por que você gostaria de trabalhar conosco...",
 };
 
 export default function PartnerForm() {
@@ -154,7 +167,7 @@ export default function PartnerForm() {
       <Header />
 
       <div className="container mx-auto px-4 py-8">
-        <Card className="w-full max-w-2xl mx-auto my-10">
+        <Card className="w-full max-w-2xl mx-auto my-10 shadow-lg">
           <CardHeader className="bg-purple-100 rounded-t-lg">
             <CardTitle className="text-3xl font-bold text-purple-800">
               Corretor: Seja Nosso Parceiro
@@ -164,6 +177,10 @@ export default function PartnerForm() {
             </CardDescription>
           </CardHeader>
           <CardContent className="mt-6">
+            <Progress
+              value={((currentStep + 1) / steps.length) * 100}
+              className="mb-6"
+            />
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -176,7 +193,7 @@ export default function PartnerForm() {
                     name={field as keyof z.infer<typeof formSchema>}
                     render={({ field: fieldProps }) => (
                       <FormItem>
-                        <FormLabel>
+                        <FormLabel className="text-sm font-medium text-gray-700">
                           {field.charAt(0).toUpperCase() + field.slice(1)}
                         </FormLabel>
                         <FormControl>
@@ -187,8 +204,10 @@ export default function PartnerForm() {
                                 defaultValue={fieldProps.value}
                               >
                                 <FormControl>
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Selecione uma opção" />
+                                  <SelectTrigger className="bg-[#ececec] border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                                    <SelectValue
+                                      placeholder={placeholders[field]}
+                                    />
                                   </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>
@@ -198,12 +217,20 @@ export default function PartnerForm() {
                               </Select>
                             ) : field === "motivo" ? (
                               <Textarea
-                                placeholder="Escreva aqui seus motivos"
-                                className="min-h-[120px] resize-y pl-10"
+                                placeholder={placeholders[field]}
+                                className="min-h-[120px] resize-y pl-10 bg-[#ececec] border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
                                 {...fieldProps}
                               />
                             ) : (
-                              <Input className="pl-10" {...fieldProps} />
+                              <Input
+                                className="pl-10 bg-[#ececec] border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
+                                placeholder={
+                                  placeholders[
+                                    field as keyof typeof placeholders
+                                  ]
+                                }
+                                {...fieldProps}
+                              />
                             )}
                             {fieldIcons[field as keyof typeof fieldIcons] && (
                               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
@@ -215,7 +242,7 @@ export default function PartnerForm() {
                             )}
                           </div>
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-xs text-red-500" />
                       </FormItem>
                     )}
                   />
@@ -229,6 +256,7 @@ export default function PartnerForm() {
               variant="outline"
               onClick={() => setCurrentStep((prev) => Math.max(0, prev - 1))}
               disabled={currentStep === 0}
+              className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
             >
               <ChevronLeft className="mr-2 h-4 w-4" /> Anterior
             </Button>
@@ -240,6 +268,7 @@ export default function PartnerForm() {
                   : handleNext
               }
               disabled={isSubmitting}
+              className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded shadow"
             >
               {currentStep === steps.length - 1
                 ? isSubmitting
