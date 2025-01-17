@@ -35,7 +35,7 @@ export default function dashboard() {
   ]);
   const [announcement, setAnnouncement] = useState(false);
   const [hasVisibleNotifications, sethasVisibleNotifications] = useState(false);
-  const { user } = useAuth();
+  // const { user } = useAuth();
   return (
     <div>
       <DashboardPage>
@@ -72,7 +72,7 @@ export default function dashboard() {
           </div>
         </DashboardPageHeader>
 
-        {user?.role === "super_admin" && (
+        {/* {user?.role === "super_admin" && (
           <div className="">
             <div className=" py-5 px-5 flex items-center justify-between border-b border-border">
               <h1>Adicionar o corretor</h1>
@@ -82,7 +82,7 @@ export default function dashboard() {
               <form></form>
             </div>
           </div>
-        )}
+        )} */}
       </DashboardPage>
     </div>
   );
