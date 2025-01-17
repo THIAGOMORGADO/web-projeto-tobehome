@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -30,57 +30,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
 import Header from "@/app/components/Header";
 import { toast } from "sonner";
 import {
   User,
   Mail,
   Award,
-  MapPin,
   Home,
+  MapPin,
   Building,
   MapPinned,
   HelpCircle,
-  MessageSquare,
-  CheckCircle,
 } from "lucide-react";
-
-const formSchema = z.object({
-  nome: z.string().min(2, { message: "Nome deve ter pelo menos 2 caracteres" }),
-  endereco: z
-    .string()
-    .min(5, { message: "Endereço deve ter pelo menos 5 caracteres" }),
-  creci: z
-    .string()
-    .min(3, { message: "CRECI deve ter pelo menos 3 caracteres" }),
-  email: z.string().email({ message: "Email inválido" }),
-  local: z
-    .string()
-    .min(2, { message: "Local deve ter pelo menos 2 caracteres" }),
-  locacao: z.enum(["sim", "nao"], {
-    required_error: "Por favor selecione uma opção",
-  }),
-  estado: z
-    .string()
-    .min(2, { message: "Estado deve ter pelo menos 2 caracteres" }),
-  cidade: z
-    .string()
-    .min(2, { message: "Cidade deve ter pelo menos 2 caracteres" }),
-  bairro: z
-    .string()
-    .min(2, { message: "Bairro deve ter pelo menos 2 caracteres" }),
-  motivo: z
-    .string()
-    .min(10, { message: "Motivo deve ter pelo menos 10 caracteres" }),
-});
-
-const fieldGroups = [
-  { title: "Informações Pessoais", fields: ["nome", "email", "creci"] },
-  { title: "Endereço", fields: ["endereco", "estado", "cidade", "bairro"] },
-  { title: "Informações Profissionais", fields: ["local", "locacao"] },
-  { title: "Motivação", fields: ["motivo"] },
-];
 
 const fieldIcons = {
   nome: User,
@@ -92,10 +53,9 @@ const fieldIcons = {
   bairro: MapPinned,
   local: MapPin,
   locacao: HelpCircle,
-  motivo: MessageSquare,
 };
 
-const placeholders = {
+const placeholders: any = {
   nome: "Ex: João da Silva",
   email: "seu.email@exemplo.com",
   creci: "Ex: 123456-F",
@@ -105,26 +65,52 @@ const placeholders = {
   bairro: "Ex: Centro",
   local: "Ex: São Paulo, SP",
   locacao: "Selecione uma opção",
-  motivo: "Descreva por que você gostaria de trabalhar conosco...",
+  motivo1: "Selecione um motivo",
+  motivo2: "Selecione um motivo",
+  motivo3: "Selecione um motivo",
 };
+
+const motivosOptions = [
+  "Interesse em crescimento profissional",
+  "Possibilidade de trabalhar em equipe",
+  "Identificação com os valores da empresa",
+  "Busca por novos desafios",
+  "Outros (especifique abaixo)",
+];
+
+const formSchema = z.object({
+  nome: z.string().min(2),
+  email: z.string().email(),
+  creci: z.string().min(2),
+  endereco: z.string().min(2),
+  estado: z.string().min(2),
+  cidade: z.string().min(2),
+  bairro: z.string().min(2),
+  local: z.string().min(2),
+  locacao: z.string().min(1),
+  motivo1: z.string().min(1),
+  motivo2: z.string().min(1),
+  motivo3: z.string().min(1),
+});
 
 export default function PartnerForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [completedFields, setCompletedFields] = useState<string[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       nome: "",
-      endereco: "",
-      creci: "",
       email: "",
-      local: "",
-      locacao: undefined,
+      creci: "",
+      endereco: "",
       estado: "",
       cidade: "",
       bairro: "",
-      motivo: "",
+      local: "",
+      locacao: "",
+      motivo1: "",
+      motivo2: "",
+      motivo3: "",
     },
     mode: "onChange",
   });
@@ -134,23 +120,14 @@ export default function PartnerForm() {
       setIsSubmitting(true);
       await new Promise((resolve) => setTimeout(resolve, 2000));
       console.log("Valores enviados:", values);
-      toast("Formulário enviado com sucesso! Entraremos em contato em breve.");
+      toast("Formulário enviado com sucesso!");
       form.reset();
-      setCompletedFields([]);
     } catch (error) {
       console.error("Erro ao enviar o formulário:", error);
       toast("Erro ao enviar o formulário");
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const handleFieldCompletion = (fieldName: string, isValid: boolean) => {
-    setCompletedFields((prev) =>
-      isValid
-        ? [...new Set([...prev, fieldName])]
-        : prev.filter((f) => f !== fieldName)
-    );
   };
 
   return (
@@ -173,99 +150,89 @@ export default function PartnerForm() {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-8"
               >
-                {fieldGroups.map((group, index) => (
-                  <div key={index} className="space-y-4">
-                    <h3 className="text-lg font-semibold text-gray-700">
-                      {group.title}
-                    </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {group.fields.map((field) => (
-                        <FormField
-                          key={field}
-                          control={form.control}
-                          name={field as keyof z.infer<typeof formSchema>}
-                          render={({ field: fieldProps }) => (
-                            <FormItem>
-                              <FormLabel className="text-sm font-medium text-gray-700 flex items-center">
-                                {field.charAt(0).toUpperCase() + field.slice(1)}
-                                {completedFields.includes(field) && (
-                                  <CheckCircle className="ml-2 h-4 w-4 text-green-500" />
+                {/* Nome, email, creci, etc. */}
+                {[
+                  "nome",
+                  "email",
+                  "creci",
+                  "endereco",
+                  "estado",
+                  "cidade",
+                  "bairro",
+                  "local",
+                ].map((field, index) => (
+                  <FormField
+                    key={index}
+                    control={form.control}
+                    name={field as keyof z.infer<typeof formSchema>}
+                    render={({ field: fieldProps }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium text-gray-700">
+                          {field.charAt(0).toUpperCase() + field.slice(1)}
+                        </FormLabel>
+                        <FormControl>
+                          <div className="relative">
+                            <Input
+                              {...fieldProps}
+                              placeholder={
+                                placeholders[field as keyof typeof placeholders]
+                              }
+                              className="pl-10 bg-[#ececec] border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
+                            />
+                            {fieldIcons[field as keyof typeof fieldIcons] && (
+                              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                                {React.createElement(
+                                  fieldIcons[field as keyof typeof fieldIcons],
+                                  { size: 18 }
                                 )}
-                              </FormLabel>
-                              <FormControl>
-                                <div className="relative">
-                                  {field === "locacao" ? (
-                                    <Select
-                                      onValueChange={(value) => {
-                                        fieldProps.onChange(value);
-                                        handleFieldCompletion(field, !!value);
-                                      }}
-                                      defaultValue={fieldProps.value}
-                                    >
-                                      <FormControl>
-                                        <SelectTrigger className="bg-[#ececec] border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 pl-10">
-                                          <SelectValue
-                                            placeholder={placeholders[field]}
-                                          />
-                                        </SelectTrigger>
-                                      </FormControl>
-                                      <SelectContent>
-                                        <SelectItem value="sim">Sim</SelectItem>
-                                        <SelectItem value="nao">Não</SelectItem>
-                                      </SelectContent>
-                                    </Select>
-                                  ) : field === "motivo" ? (
-                                    <Textarea
-                                      placeholder={placeholders[field]}
-                                      className="text-sm flex items-center justify-center resize-y pl-10 bg-[#ececec] border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
-                                      {...fieldProps}
-                                      onChange={(e) => {
-                                        fieldProps.onChange(e);
-                                        handleFieldCompletion(
-                                          field,
-                                          e.target.value.length >= 10
-                                        );
-                                      }}
-                                    />
-                                  ) : (
-                                    <Input
-                                      className="pl-10  bg-[#ececec] border-gray-900 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
-                                      placeholder={
-                                        placeholders[
-                                          field as keyof typeof placeholders
-                                        ]
-                                      }
-                                      {...fieldProps}
-                                      onChange={(e) => {
-                                        fieldProps.onChange(e);
-                                        handleFieldCompletion(
-                                          field,
-                                          e.target.value.length >= 2
-                                        );
-                                      }}
-                                    />
-                                  )}
-                                  {fieldIcons[
-                                    field as keyof typeof fieldIcons
-                                  ] && (
-                                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                                      {React.createElement(
-                                        fieldIcons[
-                                          field as keyof typeof fieldIcons
-                                        ],
-                                        { size: 18 }
-                                      )}
-                                    </span>
-                                  )}
-                                </div>
-                              </FormControl>
-                              <FormMessage className="text-xs text-red-500" />
-                            </FormItem>
-                          )}
-                        />
-                      ))}
-                    </div>
-                  </div>
+                              </span>
+                            )}
+                          </div>
+                        </FormControl>
+                        <FormMessage className="text-xs text-red-500" />
+                      </FormItem>
+                    )}
+                  />
+                ))}
+
+                {/* Select para Motivo 1, Motivo 2, Motivo 3 */}
+                {["motivo1", "motivo2", "motivo3"].map((field, index) => (
+                  <FormField
+                    key={index}
+                    control={form.control}
+                    name={field as keyof z.infer<typeof formSchema>}
+                    render={({ field: fieldProps }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium text-gray-700">
+                          {field.charAt(0).toUpperCase() + field.slice(1)}
+                        </FormLabel>
+                        <FormControl>
+                          <div className="relative">
+                            <Select
+                              onValueChange={(value) =>
+                                fieldProps.onChange(value)
+                              }
+                              defaultValue={fieldProps.value}
+                            >
+                              <SelectTrigger className="bg-[#ececec] border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50 pl-10">
+                                <SelectValue
+                                  placeholder={placeholders[field]}
+                                />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {motivosOptions.map((option) => (
+                                  <SelectItem key={option} value={option}>
+                                    {option}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </FormControl>
+                        <FormMessage className="text-xs text-red-500" />
+                      </FormItem>
+                    )}
+                  />
                 ))}
               </form>
             </Form>
@@ -274,10 +241,7 @@ export default function PartnerForm() {
             <Button
               type="submit"
               onClick={form.handleSubmit(onSubmit)}
-              disabled={
-                isSubmitting ||
-                completedFields.length !== Object.keys(fieldIcons).length
-              }
+              disabled={isSubmitting}
               className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded shadow"
             >
               {isSubmitting ? "Enviando..." : "Enviar"}
