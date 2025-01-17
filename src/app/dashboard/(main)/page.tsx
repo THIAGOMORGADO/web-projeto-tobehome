@@ -35,7 +35,7 @@ export default function dashboard() {
   ]);
   const [announcement, setAnnouncement] = useState(false);
   const [hasVisibleNotifications, sethasVisibleNotifications] = useState(false);
-  const { user } = useAuth();
+  // const { user } = useAuth();
   return (
     <div>
       <DashboardPage>
@@ -72,8 +72,8 @@ export default function dashboard() {
           </div>
         </DashboardPageHeader>
 
-        {user?.role === "super_admin" && <h1>Tela do usuario admin</h1>}
-        {user?.role === "proprietario" && <h1>Tela do usuario Proprietario</h1>}
+        {/* {user?.role === "super_admin" && <h1>Tela do usuario admin</h1>}
+        {user?.role === "proprietario" && <h1>Tela do usuario Proprietario</h1>} */}
       </DashboardPage>
     </div>
   );
