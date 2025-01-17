@@ -203,9 +203,6 @@ export default function PartnerForm() {
                     name={field as keyof z.infer<typeof formSchema>}
                     render={({ field: fieldProps }) => (
                       <FormItem>
-                        <FormLabel className="text-sm font-medium text-gray-700">
-                          {field.charAt(0).toUpperCase() + field.slice(1)}
-                        </FormLabel>
                         <FormControl>
                           <div className="relative">
                             <Select
