@@ -27,18 +27,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <AuthProvider>
-        <body
-          className={cn(
-            "min-h-screen bg-background font-sans antialiased ",
-            `${geistSans.variable} ${geistMono.variable} antialiased`
-          )}
-          suppressHydrationWarning={true}
-        >
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased ",
+          `${geistSans.variable} ${geistMono.variable} antialiased`
+        )}
+        suppressHydrationWarning={true}
+      >
+        <AuthProvider>
           {children}
           <Toaster />
-        </body>
-      </AuthProvider>
+        </AuthProvider>
+      </body>
     </html>
   );
 }
