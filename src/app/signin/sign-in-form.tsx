@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
@@ -8,56 +9,51 @@ import { Input, Label } from "@/components/ui/custom-input";
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { users } from "../mock/users";
-// import { useAuth } from "../context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 
 export function SignInForm() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-
-  // const { login } = useAuth();
+  const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null); // Resetando o erro
+    e.preventDefault(); // Previne o comportamento padrão do formulário
+
+    setError(null); // Reseta o erro inicial
 
     try {
-      // Verificar as credenciais com os usuários mockados
+      // Verificar se as credenciais correspondem a algum usuário mockado
       const user = users.find(
         (user) => user.email === email && user.password === password
       );
 
       if (user) {
-        // Chama o login do contexto
-        // login(user.name, user.email, user.role);
-        console.log(user);
+        // Chama o login do contexto com as informações do usuário
+        login(user.name, user.email, user.role);
+        console.log("Usuário encontrado:", user);
 
-        switch (user.role) {
-          case "corretor":
-            router.push("/dashboard/corretor-dashboard");
-            break;
-          case "proprietario":
-            router.push("/dashboard/proprietario-dashboard");
-            break;
-          case "super-admin":
-            router.push("/dashboard/admin-dashboard");
-            break;
-          case "user":
-            router.push("/dashboard");
-            break;
-          default:
-            console.error("Role inválida ou não configurada:", user.role);
+        // Lógica de redirecionamento baseada na role
+        if (user.role === "corretor") {
+          return router.push("/dashboard/corretor-dashboard");
+        } else if (user.role === "proprietario") {
+          router.push("/dashboard/proprietario-dashboard");
+        } else if (user.role === "super_admin") {
+          router.push("/dashboard/admin-dashboard");
+        } else if (user.role === "user") {
+          router.push("/dashboard");
+        } else {
+          throw new Error("Papel do usuário inválido.");
         }
-
-        throw new Error("Invalid role");
       } else {
-        throw new Error("Invalid credentials");
+        // Lançar erro caso as credenciais sejam inválidas
+        throw new Error("Credenciais inválidas.");
       }
-    } catch (err) {
-      // Tratar erros e exibir mensagem de erro
+    } catch (err: any) {
+      console.error("Erro no login:", err.message);
       setError(
-        "Failed to sign in. Please check your credentials and try again."
+        "Não foi possível realizar o login. Verifique suas credenciais e tente novamente."
       );
     }
   };
