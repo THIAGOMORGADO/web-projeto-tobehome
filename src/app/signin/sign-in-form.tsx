@@ -15,6 +15,7 @@ export function SignInForm() {
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+
   const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
