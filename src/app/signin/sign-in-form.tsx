@@ -8,7 +8,7 @@ import { Input, Label } from "@/components/ui/custom-input";
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { users } from "../mock/users";
-import { useAuth } from "../context/AuthContext";
+// import { useAuth } from "../context/AuthContext";
 
 export function SignInForm() {
   const [email, setEmail] = useState<string>("");
@@ -16,7 +16,7 @@ export function SignInForm() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  const { login } = useAuth();
+  // const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,7 +30,7 @@ export function SignInForm() {
 
       if (user) {
         // Chama o login do contexto
-        login(user.name, user.email, user.role);
+        // login(user.name, user.email, user.role);
         console.log(user);
 
         switch (user.role) {
