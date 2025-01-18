@@ -8,15 +8,19 @@ import { Input, Label } from "@/components/ui/custom-input";
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { users } from "../mock/users";
+import { useAuth } from "../context/AuthContext";
 
 export function SignInForm() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    router.push("/dashboard");
     setError(null); // Resetando o erro
 
     try {
@@ -27,21 +31,27 @@ export function SignInForm() {
 
       if (user) {
         // Chama o login do contexto
-        // login(user.name, user.email, user.role);
+        login(user.name, user.email, user.role);
         console.log(user);
 
-        // Lógica de redirecionamento com base no papel do usuário
-        if (
-          user.role === "corretor" ||
-          user.role === "proprietario" ||
-          user.role === "user"
-        ) {
-          router.push("/dashboard"); // Para corretores ou proprietários
-        } else if (user.role === "super_admin") {
-          router.push("/dashboard"); // Para super admin
-        } else {
-          throw new Error("Invalid role");
+        switch (user.role) {
+          case "corretor":
+            router.push("/dashboard/corretor-dashboard");
+            break;
+          case "proprietario":
+            router.push("/dashboard/proprietario-dashboard");
+            break;
+          case "super-admin":
+            router.push("/dashboard/admin-dashboard");
+            break;
+          case "user":
+            router.push("/dashboard");
+            break;
+          default:
+            console.error("Role inválida ou não configurada:", user.role);
         }
+
+        throw new Error("Invalid role");
       } else {
         throw new Error("Invalid credentials");
       }
