@@ -1,9 +1,8 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-"use client";
-
+import {
+  DashboardPage,
+  DashboardPageMain,
+} from "@/app/components/dashboard/dashboard";
 import { DashboardPageHeader } from "@/app/components/dashboard/dashboard";
-import { DashboardPage } from "@/app/components/dashboard/dashboard";
-
 import React from "react";
 
 export default function page() {
@@ -11,9 +10,12 @@ export default function page() {
     <DashboardPage>
       <DashboardPageHeader className="">
         <div className="">
-          <h1>dahsboard</h1>
+          <h1>Cadastra um novo imovel</h1>
         </div>
       </DashboardPageHeader>
+      <DashboardPageMain>
+        <h1>Conteudo</h1>
+      </DashboardPageMain>
     </DashboardPage>
   );
 }

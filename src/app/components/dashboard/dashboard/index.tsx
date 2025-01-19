@@ -1,4 +1,3 @@
-"use client";
 import { cn } from "@/lib/utils";
 
 export type DashboardPageGenericProps<T = unknown> = {
@@ -10,7 +9,7 @@ export function DashboardPage({
   className,
   children,
 }: DashboardPageGenericProps) {
-  return <section className={cn(["h-screen ", className])}>{children}</section>;
+  return <section className={cn(["h-screen", className])}>{children}</section>;
 }
 
 export function DashboardPageHeader({
@@ -20,7 +19,7 @@ export function DashboardPageHeader({
   return (
     <header
       className={cn([
-        "px-6 py-1.5 h-12 border-b border-border border-[#FE8302] flex items-center justify-between bg-[#7e22ce]",
+        "px-6 h-12 border-b border-border flex items-center justify-between",
         className,
       ])}
     >
@@ -34,7 +33,9 @@ export function DashboardPageHeaderTitle({
   children,
 }: DashboardPageGenericProps) {
   return (
-    <span className={cn(["text-2xl font-bold uppercase", className, "pl-11 sm:pl-8"])}>
+    <span
+      className={cn(["text-xs text-muted-foreground uppercase", className])}
+    >
       {children}
     </span>
   );
