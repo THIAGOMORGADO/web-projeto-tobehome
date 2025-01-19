@@ -1,19 +1,15 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-"use client";
-
-import { DashboardPageHeader } from "@/app/components/dashboard/dashboard";
-import { DashboardPage } from "@/app/components/dashboard/dashboard";
 
 import React from "react";
 
 export default function page() {
   return (
-    <DashboardPage>
-      <DashboardPageHeader className="">
-        <div className="">
-          <h1>dahsboard</h1>
-        </div>
-      </DashboardPageHeader>
-    </DashboardPage>
+    <div className="space-y-4">
+      <h2 className="text-2xl font-bold">Welcome to the Dashboard</h2>
+      <p>This is an example page to demonstrate the sidebar functionality.</p>
+      <div className="h-32 w-full rounded-md bg-muted"></div>
+      <div className="h-32 w-full rounded-md bg-muted"></div>
+      <div className="h-32 w-full rounded-md bg-muted"></div>
+    </div>
   );
 }
