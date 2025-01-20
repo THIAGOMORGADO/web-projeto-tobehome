@@ -13,8 +13,14 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
+import Link from "next/link";
+
 const menuItems = [
-  { icon: Home, label: "Home", url: "/" },
+  {
+    icon: Home,
+    label: "Cadastra Imovel",
+    url: "/dashboard/corretor-dashboard",
+  },
   { icon: Users, label: "Users", url: "/users" },
   { icon: Settings, label: "Settings", url: "/settings" },
   { icon: HelpCircle, label: "Help", url: "/help" },
@@ -22,27 +28,28 @@ const menuItems = [
 
 export function SideBar() {
   return (
-    <Sidebar className="border-r">
+    <Sidebar className="border-r bg-red-500">
       <SidebarHeader className="p-4">
-        <h2 className="text-xl font-bold">My App</h2>
+        <SidebarContent className=" flex gap-2">ola</SidebarContent>
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
           {menuItems.map((item) => (
             <SidebarMenuItem key={item.label}>
               <SidebarMenuButton asChild>
-                <a href={item.url} className="flex items-center">
+                <Link
+                  href={`${item.url}/addnewproppety`}
+                  className="flex items-center"
+                >
                   <item.icon className="mr-2 h-4 w-4" />
                   <span>{item.label}</span>
-                </a>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
         </SidebarMenu>
       </SidebarContent>
-      <SidebarFooter className="p-4">
-        <p className="text-sm text-muted-foreground">© 2025 My Company</p>
-      </SidebarFooter>
+      <SidebarFooter className="p-4 items-start"></SidebarFooter>
     </Sidebar>
   );
 }
