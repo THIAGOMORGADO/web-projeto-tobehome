@@ -30,9 +30,10 @@ export function SideBar() {
   return (
     <Sidebar className="border-r bg-red-500">
       <SidebarHeader className="p-4">
-        <SidebarContent className=" flex gap-2">ola</SidebarContent>
+        TESTE
       </SidebarHeader>
       <SidebarContent>
+
         <SidebarMenu>
           {menuItems.map((item) => (
             <SidebarMenuItem key={item.label}>
