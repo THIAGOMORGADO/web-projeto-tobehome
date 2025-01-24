@@ -1,14 +1,11 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import TextInput from './components/TextInput'
-import { Toast } from '@/components/ui/toast';
-import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
-import { useToast } from '@/hooks/use-toast';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
+import { useRouter } from 'next/navigation';
+
 
 
 type FormData = {
@@ -18,90 +15,31 @@ type FormData = {
 
 export default function page() {
   const { register, handleSubmit} = useForm<FormData>();
+  const routes = useRouter();
 
-  const onSubmit = handleSubmit((data) => {
-    const existingEmails = ['example1@example.com', 'example2@example.com', 'example3@example.com'];
-
-    if (!existingEmails.includes(data.email)) {
-      toast.error('Este email não existe na nossa base de dados!', {
-        description: 'Por favor, verifique o email informado.',
-        duration: 5000,
-        position: 'top-right',
-        style: {
-          color: '#9333ea', 
-          borderRadius: '0.5rem',
-          padding: '1rem',
-          boxShadow: 'lg',
-          fontSize: '0.875rem',
-          position: 'fixed',
-          top: '1rem',
-          right: '1rem',
-          border: 'none'
-        },
-      });
-      return;
-    }
-
-
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
-      console.log('Email:', data.email);
-      
-      if (!data.email) {
-        toast.error('Preencha o Campo Abaixo!', {
-          description: 'Precisamos que informe o email',
-          duration: 5000,
-          position: 'top-right',
-          style: {
-            color: '#9333ea', 
-            borderRadius: '0.5rem',
-            padding: '1rem',
-            boxShadow: 'lg',
-            fontSize: '0.875rem',
-            position: 'fixed',
-            top: '1rem',
-            right: '1rem',
-            border: 'none'
-          },
-        });
+      const response = await fetch('/api/reset-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: data.email }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        toast.error(errorData.message);
         return;
       }
 
-      toast.success('Link de recuperação enviado com sucesso!', {
-        description: `Verifique seu email para redefinir sua senha, ${data.email}`,
-        duration: 5000,
-        position: 'top-right',
-        style: {
-          color: '#9333ea',
-          borderRadius: '0.5rem',
-          padding: '1rem',
-          boxShadow: 'lg',
-          fontSize: '0.875rem',
-          position: 'fixed',
-          top: '1rem',
-          right: '1rem',
-          border: 'none'
-        },
-      });
+      toast.success('Email de redefinição de senha enviado com sucesso!');
     } catch (error) {
-      toast.error('Ocorreu um erro ao enviar o link de recuperação', {
-        description: 'Por favor, tente novamente mais tarde',
-        duration: 5000,
-        position: 'top-right',
-        style: {
-          backgroundColor: '#ef4444',
-          color: 'white', 
-          borderRadius: '0.5rem',
-          padding: '1rem',
-          boxShadow: 'lg',
-          fontSize: '0.875rem',
-          position: 'fixed',
-          top: '1rem',
-          right: '1rem',
-          border: 'none'
-        },
-      });
+      toast.error('Ocorreu um erro ao enviar o link de recuperação');
     }
-  })
+  };
+
+  
 
 
 
@@ -113,11 +51,10 @@ export default function page() {
           <p className="text-gray-600 text-sm">Não se preocupe! Digite seu email abaixo e enviaremos instruções para recuperar sua senha.</p>
         </div>
 
-        <form className="space-y-6" onSubmit={onSubmit}>
+        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-2">
             <label htmlFor="email" className="text-gray-700 font-medium block">Email:</label>
-            <TextInput placeHolder='Digite o email' {...register('email')}/>
-              
+            <TextInput placeHolder='Digite o email' {...register('email', { required: true })}/>
           </div>
           
           <button 
