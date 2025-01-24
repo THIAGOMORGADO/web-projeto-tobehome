@@ -4,7 +4,7 @@ import React from 'react'
 import TextInput from './components/TextInput'
 import { toast } from 'sonner';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useRouter } from 'next/navigation';
+
 
 type FormData = {
   email: string
@@ -12,7 +12,7 @@ type FormData = {
 
 export default function ForgotPasswordPage() {
   const { register, handleSubmit } = useForm<FormData>();
-  const routes = useRouter();
+
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
@@ -23,6 +23,7 @@ export default function ForgotPasswordPage() {
         },
         body: JSON.stringify({ email: data.email }),
       });
+
 
       if (!response.ok) {
         const errorData = await response.json();
