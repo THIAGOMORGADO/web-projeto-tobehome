@@ -10,6 +10,7 @@ import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { users } from "../mock/users";
 import { useAuth } from "@/context/AuthContext";
+import Link from "next/link";
 
 export function SignInForm() {
   const [email, setEmail] = useState<string>("");
@@ -85,6 +86,9 @@ export function SignInForm() {
           placeholder="Senha"
           className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
         />
+        <div className="w-full ">
+        <Link  href="/signin/forgotPassword" className="flex items-end justify-end p-1  w-full text-[#7e22ce] hover:underline">Esqueceu a senha ?</Link>
+        </div>
       </div>
       {error && (
         <Alert variant="destructive">

@@ -11,12 +11,12 @@ export default function SignIn() {
         </h1>
         <SignInForm />
         <p className="mt-4 text-center text-sm text-gray-600">
-          Don't have an account?{" "}
+          Não tem uma conta?{" "}
           <Link
             href="/signup"
             className="font-medium text-purple-700 hover:text-purple-600"
           >
-            Create a new account
+            Cadastra-se
           </Link>
         </p>
       </div>

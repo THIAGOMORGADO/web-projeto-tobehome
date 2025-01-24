@@ -11,11 +11,12 @@ import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
+
 type LayoutProps = {
   children: ReactNode;
 };
 
-export default function layout({ children }: LayoutProps) {
+export default async function layout({ children }: LayoutProps) {
   const { user } = useAuth();
   return (
     <SidebarProvider>
