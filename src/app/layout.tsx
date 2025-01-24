@@ -4,10 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/context/AuthContext";
-import {
-  ClerkProvider,
 
-} from '@clerk/nextjs'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <ClerkProvider>
+     
         <AuthProvider>
           <body
             className={cn(
@@ -44,7 +41,7 @@ export default function RootLayout({
             <Toaster />
           </body>
         </AuthProvider>
-      </ClerkProvider>
+     
     </html>
   );
 }

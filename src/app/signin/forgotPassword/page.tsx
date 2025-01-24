@@ -39,10 +39,6 @@ export default function page() {
     }
   };
 
-  
-
-
-
   return (
     <div className='bg-gradient-to-br from-purple-600 to-purple-900 w-screen h-screen flex items-center justify-center'>
       <div className="bg-white shadow-xl border-border border-[1px] border-zinc-200 p-8 rounded-lg max-w-md w-full mx-4">
