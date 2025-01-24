@@ -6,15 +6,12 @@ import { toast } from 'sonner';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 
-
-
 type FormData = {
   email: string
 }
 
-
-export default function page() {
-  const { register, handleSubmit} = useForm<FormData>();
+export default function ForgotPasswordPage() {
+  const { register, handleSubmit } = useForm<FormData>();
   const routes = useRouter();
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
@@ -50,7 +47,7 @@ export default function page() {
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-2">
             <label htmlFor="email" className="text-gray-700 font-medium block">Email:</label>
-            <TextInput placeHolder='Digite o email' {...register('email', { required: true })}/>
+            <TextInput placeHolder='Digite o email' {...register('email', { required: true })} />
           </div>
           
           <button 
