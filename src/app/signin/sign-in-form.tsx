@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
- 
 "use client";
 
 import { useState } from "react";
@@ -51,8 +49,8 @@ export function SignInForm() {
         // Lançar erro caso as credenciais sejam inválidas
         throw new Error("Credenciais inválidas.");
       }
-    } catch (err: any) {
-      console.error("Erro no login:", err.message);
+    } catch (err: unknown) {
+      console.error("Erro no login:", (err as Error).message);
       setError(
         "Não foi possível realizar o login. Verifique suas credenciais e tente novamente."
       );
@@ -87,7 +85,7 @@ export function SignInForm() {
           className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
         />
         <div className="w-full ">
-        <Link  href="/signin/forgotPassword" className="flex items-end justify-end p-1  w-full text-[#7e22ce] hover:underline">Esqueceu a senha ?</Link>
+          <Link href="/signin/forgotPassword" className="flex items-end justify-end p-1  w-full text-[#7e22ce] hover:underline">Esqueceu a senha ?</Link>
         </div>
       </div>
       {error && (

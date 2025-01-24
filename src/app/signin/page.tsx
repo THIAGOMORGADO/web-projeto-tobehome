@@ -1,4 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */
+
 import { SignInForm } from "./sign-in-form";
 import Link from "next/link";
 
