@@ -52,8 +52,8 @@ export default function MultiStepForm() {
   return (
     <Card className="w-full max-w-lg mx-auto">
       <CardHeader>
-        <CardTitle>Preencha os campos para cadastrar-se</CardTitle>
-        <CardDescription>
+        <CardTitle className="text-purple-600 font-medium text-xl block">Preencha os campos para cadastrar-se</CardTitle>
+        <CardDescription className="text-purple-600 font-medium block">
           Etapa {step} de {TOTAL_STEPS}
         </CardDescription>
         <Progress value={progress} className="w-full mt-2 bg-purple-500" />
