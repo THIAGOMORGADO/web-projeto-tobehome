@@ -9,6 +9,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { users } from "../mock/users";
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
+import  TextInput  from "./forgotPassword/components/TextInput";
 
 export function SignInForm() {
   const [email, setEmail] = useState<string>("");
@@ -61,39 +62,21 @@ export function SignInForm() {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
-        <Input
-          id="email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)} // Controlando o estado do email
-          autoComplete="email"
-          required
-          placeholder="Email"
-          className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
-        />
+        <TextInput password={false} placeHolder="digite seu email"   className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"/>
       </div>
       <div className="space-y-2">
         <Label htmlFor="password">Senha</Label>
-        <Input
-          id="password"
+        
+        <TextInput
+          placeHolder="Senha"
+          password
           type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)} // Controlando o estado da senha
-          autoComplete="current-password"
-          required
-          placeholder="Senha"
-          className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
+          className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] px-2 font-medium mt-1 block w-full rounded-md shadow-sm focus:outline-none sm:text-sm"
         />
         <div className="w-full ">
           <Link href="/signin/forgotPassword" className="flex items-end justify-end p-1  w-full text-[#7e22ce] hover:underline">Esqueceu a senha ?</Link>
         </div>
       </div>
-      {error && (
-        <Alert variant="destructive">
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
-      )}
       <Button
         type="submit"
         className="w-full bg-purple-700 hover:bg-purple-800 text-[#FE8302]"
