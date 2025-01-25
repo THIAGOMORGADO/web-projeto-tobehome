@@ -69,7 +69,7 @@ export function SignInForm() {
     <form onSubmit={onSubmit} className="space-y-4">
       <div className="space-y-2">
         <label htmlFor="email" className="text-purple-600 font-medium block">Email</label>
-        <TextInput password={false} placeHolder="digite seu email" {...register('email')} className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"/>
+        <TextInput user placeHolder="digite seu email" {...register('email')} className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"/>
         {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
       </div>
       <div className="space-y-2">
