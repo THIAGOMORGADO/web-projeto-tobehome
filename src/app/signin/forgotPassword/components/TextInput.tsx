@@ -15,6 +15,7 @@ export default function TextInput({ placeHolder, error, password, ...props }: Te
         {password ? <Lock className="text-purple-500 mr-2" /> : <User className="text-purple-500 mr-2" />} {/* Dynamic icon based on password prop */}
         <input
           placeholder={placeHolder}
+          
           {...props}
           className={`appearance-none bg-transparent border-none w-full outline-none text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none ${error ? 'border-red-500' : ''}`}
         />

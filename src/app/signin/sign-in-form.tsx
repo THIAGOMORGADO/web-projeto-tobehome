@@ -61,14 +61,15 @@ export function SignInForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="email">Email</Label>
+        <label htmlFor="email" className="text-purple-600 font-medium block">Email</label>
         <TextInput password={false} placeHolder="digite seu email"   className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] px-2 font-medium mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"/>
       </div>
       <div className="space-y-2">
-        <Label htmlFor="password">Senha</Label>
+        <label htmlFor="password" className="text-purple-600 font-medium block">Senha</label>
         
         <TextInput
           placeHolder="Senha"
+          
           password
           type="password"
           className="h-8 bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] px-2 font-medium mt-1 block w-full rounded-md shadow-sm focus:outline-none sm:text-sm"
@@ -79,7 +80,8 @@ export function SignInForm() {
       </div>
       <Button
         type="submit"
-        className="w-full bg-purple-700 hover:bg-purple-800 text-[#FE8302]"
+        
+        className="w-full bg-white border-2 text-purple-600 border-purple-700"
       >
         Sign In
       </Button>

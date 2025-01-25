@@ -95,7 +95,7 @@ export default function ForgotPasswordPage() {
 
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-2">
-            <label htmlFor="email" className="text-gray-700 font-medium block">Email:</label>
+            <label htmlFor="email" className="text-purple-600 font-medium block">Email:</label>
             <TextInput  placeHolder='Digite o email' {...register('email')} />
             {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>} {/* Display error message if exists */}
           </div>
