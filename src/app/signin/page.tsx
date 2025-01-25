@@ -13,7 +13,7 @@ export default function SignIn() {
         <p className="mt-4 text-center text-sm text-gray-600">
           Não tem uma conta?{" "}
           <Link
-            href="/signup"
+            href="/signin/signup"
             className="font-medium text-purple-700 hover:text-purple-600"
           >
             Cadastra-se
