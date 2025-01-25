@@ -1,7 +1,5 @@
 import TextInput from "@/app/signin/forgotPassword/components/TextInput";
 
-import { Label } from "@/components/ui/label";
-
 interface CreciFormProps {
   register: any;
   errors: any;
@@ -12,37 +10,37 @@ const CreciForm: React.FC<CreciFormProps> = ({ register, errors, }) => {
   return (
     <div className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="rg" className="text-sm font-medium text-gray-700">
+        <label htmlFor="rg" className="text-purple-600 font-medium block">
           RG
-        </Label>
+        </label>
         <TextInput
           placeHolder="Informe seu RG"
-          {...register('rg', { required: 'RG é obrigatório.' })}
+          {...register('rg' )}
           error={errors.rg}
           className="bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
         />
         
       </div>
       <div className="space-y-2">
-        <Label htmlFor="cpf" className="text-sm font-medium text-gray-700">
+        <label htmlFor="cpf" className="text-purple-600 font-medium block">
           CPF
-        </Label>
+        </label>
         <TextInput
           placeHolder="Insira seu CPF"
-          {...register('cpf', { required: 'CPF é obrigatório.' })}
+          {...register('cpf')}
           error={errors.cpf}
           className="bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
         />
         
       </div>
       <div className="space-y-2">
-        <Label htmlFor="birthDate" className="text-sm font-medium text-gray-700">
+        <label htmlFor="birthDate" className="text-purple-600 font-medium block">
           Data de Nascimento
-        </Label>
+        </label>
         <TextInput
           placeHolder="Informe sua data de nascimento"
           date
-          {...register('birthDate', { required: 'Data de nascimento é obrigatória.' })}
+          {...register('birthDate')}
           error={errors.birthDate}
           className="bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
         />

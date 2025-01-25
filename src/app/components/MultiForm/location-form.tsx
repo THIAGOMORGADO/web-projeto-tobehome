@@ -3,9 +3,6 @@
 "use client";
 
 import TextInput from "@/app/signin/forgotPassword/components/TextInput";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-
 interface LocationFormProps {
   register: any;
   errors: any;
@@ -16,56 +13,56 @@ const LocationForm: React.FC<LocationFormProps> = ({ register, errors }) => {
   return (
     <div className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="address" className="text-sm font-medium text-gray-700">
+        <label htmlFor="address" className="text-purple-600 font-medium block">
           Endereço
-        </Label>
+        </label>
         <TextInput
           placeHolder="Rua, número,"
-          {...register('address', { required: 'Endereço é obrigatório.' })}
+          {...register('address')}
           className="bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
         />
         {errors.address && <span className="text-red-500">{errors.address.message}</span>}
       </div>
       <div className="space-y-2">
-        <Label htmlFor="neighborhood" className="text-sm font-medium text-gray-700">
+        <label htmlFor="neighborhood" className="text-purple-600 font-medium block">
           Bairro
-        </Label>
+        </label>
         <TextInput
           placeHolder="Bairro"
-          {...register('neighborhood', { required: 'Bairro é obrigatório.' })}
+          {...register('neighborhood')}
           className="bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
         />
         {errors.neighborhood && <span className="text-red-500">{errors.neighborhood.message}</span>}
       </div>
       <div className="space-y-2">
-        <Label htmlFor="city" className="text-sm font-medium text-gray-700">
+        <label htmlFor="city" className="text-purple-600 font-medium block">
           Cidade
-        </Label>
+        </label>
         <TextInput
           placeHolder="Cidade"
-          {...register('city', { required: 'Cidade é obrigatória.' })}
+          {...register('city', )}
           className="bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
         />
         {errors.city && <span className="text-red-500">{errors.city.message}</span>}
       </div>
       <div className="space-y-2">
-        <Label htmlFor="state" className="text-sm font-medium text-gray-700">
+        <label htmlFor="state" className="text-purple-600 font-medium block">
           Estado
-        </Label>
+        </label>
         <TextInput
           placeHolder="Estado"
-          {...register('state', { required: 'Estado é obrigatório.' })}
+          {...register('state' )}
           className="bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
         />
         {errors.state && <span className="text-red-500">{errors.state.message}</span>}
       </div>
       <div className="space-y-2">
-        <Label htmlFor="zipCode" className="text-sm font-medium text-gray-700">
+        <label htmlFor="zipCode" className="text-purple-600 font-medium block">
           CEP
-        </Label>
+        </label>
         <TextInput
           placeHolder="CEP"
-          {...register('zipCode', { required: 'CEP é obrigatório.' })}
+          {...register('zipCode',)}
           className="bg-[#7e22ce] placeholder:text-[#FE8302] text-[#FE8302] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none focus:ring-[#FE8302] focus:border-[#FE8302] sm:text-sm"
         />
         {errors.zipCode && <span className="text-red-500">{errors.zipCode.message}</span>}

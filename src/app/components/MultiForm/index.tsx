@@ -15,25 +15,12 @@ import { Progress } from "@/components/ui/progress";
 import LocationForm from "./location-form";
 import CreciForm from "./creci-form";
 import AccessForm from "./access-form";
+import { FormData } from "@/app/types/User";
 // import { axios } from "@/app/services/api";
 
 const TOTAL_STEPS = 3;
 
-type FormData = {
-  name: string;
-  email: string;
-  password: string;
-  address: string;
-  city: string;
-  neighborhood: string;
-  state: string;
-  zipCode: string;
-  uf: string;
-  confirmPassword: string;
-  rg: string;
-  cpf: string;
-  birthDate: string;
-};
+
 
 export default function MultiStepForm() {
   const [step, setStep] = useState(1);
@@ -56,18 +43,10 @@ export default function MultiStepForm() {
   const progress = (step / TOTAL_STEPS) * 100;
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    const submitForm = async (formData: FormData) => {
-      try {
-        // Here you can handle the form submission, e.g., send data to an API
-        console.log(formData); // Log the form data
-        alert("Formulário enviado com sucesso!"); // Notify the user
-      } catch (error) {
-        console.error("Erro ao enviar o formulário:", error);
-        alert("Erro ao enviar o formulário. Tente novamente mais tarde.");
-      }
-    };
+    // Criar uma logica onde o bottao de enviar do ultimo step ele faz o submit quando for progress continue anadao com os step
+    
 
-    submitForm(data); // Call the submitForm function with the collected data
+  
   };
 
   return (
@@ -101,31 +80,25 @@ export default function MultiStepForm() {
             />
           )}
           <div className="flex justify-between mt-6">
-            {step > 1 && (
+            <div className="w-full flex justify-between mt-6">
+              {step > 1 && (
+                <Button
+                  type="button" // Prevents the button from submitting the form
+                  onClick={prevStep}
+                  variant="default"
+                  className="bg-purple-600 hover:bg-purple-700 text-white py-2.5 rounded-md font-medium transition-colors duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-md"
+                >
+                  Voltar
+                </Button>
+              )}
               <Button
-                type="button" // Prevents the button from submitting the form
-                onClick={prevStep}
-                variant="default"
-                className="bg-purple-700 hover:bg-purple-800 text-[#FE8302]"
+                onClick={step < TOTAL_STEPS ? nextStep : handleSubmit(onSubmit)}
+                className="bg-purple-600 hover:bg-purple-700 text-white py-2.5 rounded-md font-medium transition-colors duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-md"
+                type={step < TOTAL_STEPS ? "button" : "submit"}
               >
-                Voltar
+                {step < TOTAL_STEPS ? "Próximo" : "Enviar"}
               </Button>
-            )}
-            {step < TOTAL_STEPS ? (
-              <Button
-                onClick={nextStep}
-                className="bg-purple-700 hover:bg-purple-800 text-[#FE8302]"
-              >
-                Próximo
-              </Button>
-            ) : (
-              <Button
-               
-                className="bg-purple-700 hover:bg-purple-800 text-[#FE8302]"
-              >
-                Enviar
-              </Button>
-            )}
+            </div>
           </div>
         </form>
       </CardContent>
